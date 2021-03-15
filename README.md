@@ -25,4 +25,4 @@ Won't have:
    * Option of deleting the passport
    * Account management
 
-Mockup: ![application_template](https://user-images.githubusercontent.com/56069835/111152470-0c6aa580-8591-11eb-84be-0db3e240ce1c.jpg)
+Mockup: ![application_template_25](https://user-images.githubusercontent.com/56069835/111153640-7fc0e700-8592-11eb-8dae-3e3bbb48c9ea.jpg)
