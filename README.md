@@ -26,5 +26,7 @@ Won't have:
    * Account management
 
 Mockup: 
+
+
 ![application_template_small](https://user-images.githubusercontent.com/56069835/111153754-9d8e4c00-8592-11eb-9991-ceef28282d85.jpg)
 
