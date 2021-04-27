@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/homeFragment">
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.covid19passportapp.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/openCreatePassportFragment"
+            app:destination="@id/createPassportFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_testsFragment"
+            app:destination="@id/testsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPassportFragment"
+        android:name="com.example.covid19passportapp.View.CreatePassportFragment"
+        android:label="fragment_create_passport"
+        tools:layout="@layout/fragment_create_passport" />
+    <fragment
+        android:id="@+id/addTestFragment"
+        android:name="com.example.covid19passportapp.AddTestFragment"
+        android:label="fragment_add_test"
+        tools:layout="@layout/fragment_add_test" />
+    <fragment
+        android:id="@+id/testsFragment"
+        android:name="com.example.covid19passportapp.TestsFragment"
+        android:label="fragment_tests"
+        tools:layout="@layout/fragment_tests" >
+        <action
+            android:id="@+id/action_testsFragment_to_addTestFragment"
+            app:destination="@id/addTestFragment" />
+    </fragment>
+
+
+</navigation>
