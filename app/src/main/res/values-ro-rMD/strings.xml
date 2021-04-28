@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Covid19PassportApp</string>
+    <string name="hello_blank_fragment">Salut, fisier gol</string>
+    <string name="passport_id">ID</string>
+    <string name="full_name">Nume</string>
+    <string name="country">Tara</string>
+    <string name="date">Data</string>
+    <string name="vaccine_type">Tipul de vaccin</string>
+    <string name="immune_until">Imun pana</string>
+    <string name="birthdate">Data nasterii</string>
+</resources>
