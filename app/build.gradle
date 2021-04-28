@@ -43,4 +43,7 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    //JodaTime
+    implementation 'net.danlew:android.joda:2.10.9.1'
 }
