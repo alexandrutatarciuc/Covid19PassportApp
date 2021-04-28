@@ -8,6 +8,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.example.covid19passportapp.R;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         /*setSupportActionBar(toolbar);*/
 
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(drawerLayout).build();
+
+        navigationView.setItemIconTintList(null);
 
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //Allows navigation to destinations when clicking menu items in the navigation drawer
