@@ -1,8 +1,9 @@
-package com.example.covid19passportapp;
+package com.example.covid19passportapp.View;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.example.covid19passportapp.Models.Test;
 import com.example.covid19passportapp.Models.TestsRecyclerAdapter;
+import com.example.covid19passportapp.R;
+import com.example.covid19passportapp.ViewModel.TestsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.joda.time.DateTime;
@@ -20,26 +23,14 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TestsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TestsFragment extends Fragment {
 
+    private TestsViewModel testsViewModel;
     private FloatingActionButton actionButton;
     private RecyclerView recyclerView;
 
     public TestsFragment() {
         // Required empty public constructor
-    }
-
-
-    public static TestsFragment newInstance() {
-        TestsFragment fragment = new TestsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

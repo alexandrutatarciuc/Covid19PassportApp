@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.covid19passportapp.HomeFragment"
+        android:name="com.example.covid19passportapp.View.HomeFragment"
         android:label="My Passport"
         tools:layout="@layout/fragment_home" >
         <action
@@ -26,12 +26,12 @@
         tools:layout="@layout/fragment_create_passport" />
     <fragment
         android:id="@+id/addTestFragment"
-        android:name="com.example.covid19passportapp.AddTestFragment"
+        android:name="com.example.covid19passportapp.View.AddTestFragment"
         android:label="Add a Test"
         tools:layout="@layout/fragment_add_test" />
     <fragment
         android:id="@+id/testsFragment"
-        android:name="com.example.covid19passportapp.TestsFragment"
+        android:name="com.example.covid19passportapp.View.TestsFragment"
         android:label="All Tests"
         tools:layout="@layout/fragment_tests" >
         <action
