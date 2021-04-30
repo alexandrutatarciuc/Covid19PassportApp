@@ -1,169 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeFragment"
-    android:background="@drawable/passport_bg">
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/passportIDTextView"
-        style="@style/PassportTextView"
-        android:layout_marginTop="35dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="@string/passport_id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".View.HomeFragment"
+        android:background="@drawable/passport_bg">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="#"
-        android:textColor="@color/royal_blue"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/passportID"
-        app:layout_constraintEnd_toStartOf="@id/passportID"
-        app:layout_constraintTop_toTopOf="@id/passportID" />
+        <TextView
+            android:id="@+id/passportIDTextView"
+            style="@style/PassportTextView"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/passport_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/passportID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="49a7bYD9Kj"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/passportIDTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/passportIDTextView" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#"
+            android:textColor="@color/royal_blue"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/passportIDValue"
+            app:layout_constraintEnd_toStartOf="@id/passportIDValue"
+            app:layout_constraintTop_toTopOf="@id/passportIDValue" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutPersonal"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/icon_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passportID">
+        <TextView
+            android:id="@+id/passportIDValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="49a7bYD9Kj"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/passportIDTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/passportIDTextView" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/personal_details"
-            android:tint="@color/white" />
+        <RelativeLayout
+            android:id="@+id/relativeLayoutPersonal"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/icon_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passportIDValue">
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/personal_details"
+                android:tint="@color/white" />
 
-    <TextView
-        android:id="@+id/fullNameTextView"
-        style="@style/PassportTextView"
-        android:layout_marginTop="12dp"
-        android:text="@string/full_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPersonal" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/fullNameValue"
-        style="@style/PassportValue"
-        android:layout_marginTop="12dp"
-        android:text="Joe Smith"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPersonal" />
+        <TextView
+            android:id="@+id/fullNameTextView"
+            style="@style/PassportTextView"
+            android:layout_marginTop="12dp"
+            android:text="@string/full_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPersonal" />
 
-    <TextView
-        android:id="@+id/birthdateTextView"
-        style="@style/PassportTextView"
-        android:text="@string/birthdate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameValue" />
+        <TextView
+            android:id="@+id/fullNameValue"
+            style="@style/PassportValue"
+            android:layout_marginTop="12dp"
+            android:text="Joe Smith"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPersonal" />
 
-    <TextView
-        android:id="@+id/birthdateValue"
-        style="@style/PassportValue"
-        android:text="15/01/2000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameValue" />
+        <TextView
+            android:id="@+id/birthdateTextView"
+            style="@style/PassportTextView"
+            android:text="@string/birthdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fullNameValue" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutVaccine"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/icon_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/birthdateTextView">
+        <TextView
+            android:id="@+id/birthdateValue"
+            style="@style/PassportValue"
+            android:text="15/01/2000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fullNameValue" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/syringe"
-            android:tint="@color/white" />
+        <RelativeLayout
+            android:id="@+id/relativeLayoutVaccine"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/icon_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/birthdateTextView">
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/syringe"
+                android:tint="@color/white" />
 
-    <TextView
-        android:id="@+id/countryTextView"
-        style="@style/PassportTextView"
-        android:layout_marginTop="12dp"
-        android:text="@string/country"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutVaccine" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/countryValue"
-        style="@style/PassportValue"
-        android:layout_marginTop="12dp"
-        android:text="Denmark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutVaccine" />
+        <TextView
+            android:id="@+id/countryTextView"
+            style="@style/PassportTextView"
+            android:layout_marginTop="12dp"
+            android:text="@string/country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutVaccine" />
 
-    <TextView
-        android:id="@+id/vaccineDateTextView"
-        style="@style/PassportTextView"
-        android:text="@string/date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/countryTextView" />
+        <TextView
+            android:id="@+id/countryValue"
+            style="@style/PassportValue"
+            android:layout_marginTop="12dp"
+            android:text="Denmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutVaccine" />
 
-    <TextView
-        android:id="@+id/vaccineDateValue"
-        style="@style/PassportValue"
-        android:text="12/03/2021"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryValue" />
+        <TextView
+            android:id="@+id/vaccineDateTextView"
+            style="@style/PassportTextView"
+            android:text="@string/date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryTextView" />
 
-    <TextView
-        android:id="@+id/vaccineTypeTextView"
-        style="@style/PassportTextView"
-        android:text="@string/vaccine_type"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vaccineDateTextView" />
+        <TextView
+            android:id="@+id/vaccineDateValue"
+            style="@style/PassportValue"
+            android:text="12/03/2021"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countryValue" />
 
-    <TextView
-        android:id="@+id/vaccineTypeValue"
-        style="@style/PassportValue"
-        android:text="Pfizer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vaccineDateValue" />
+        <TextView
+            android:id="@+id/vaccineTypeTextView"
+            style="@style/PassportTextView"
+            android:text="@string/vaccine_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vaccineDateTextView" />
 
-    <TextView
-        android:id="@+id/immuneUntilTextView"
-        style="@style/PassportTextView"
-        android:text="@string/immune_until"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vaccineTypeTextView" />
+        <TextView
+            android:id="@+id/vaccineTypeValue"
+            style="@style/PassportValue"
+            android:text="Pfizer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vaccineDateValue" />
 
-    <TextView
-        android:id="@+id/immuneUntilValue"
-        style="@style/PassportValue"
-        android:text="12/03/2023"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vaccineTypeValue" />
+        <TextView
+            android:id="@+id/immuneUntilTextView"
+            style="@style/PassportTextView"
+            android:text="@string/immune_until"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vaccineTypeTextView" />
+
+        <TextView
+            android:id="@+id/immuneUntilValue"
+            style="@style/PassportValue"
+            android:text="12/03/2023"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vaccineTypeValue" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
