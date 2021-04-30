@@ -36,15 +36,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:hint="@string/choose_test_result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/testDateInput">
 
         <AutoCompleteTextView
+            android:id="@+id/testResultInputAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/addTestButton"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_test"
+        android:fontFamily="@font/poppins_extrabold"
+        app:layout_constraintEnd_toEndOf="@+id/testResultInput"
+        app:layout_constraintTop_toBottomOf="@+id/testResultInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

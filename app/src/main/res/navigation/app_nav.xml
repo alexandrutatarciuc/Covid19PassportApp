@@ -28,7 +28,13 @@
         android:id="@+id/addTestFragment"
         android:name="com.example.covid19passportapp.View.AddTestFragment"
         android:label="Add a Test"
-        tools:layout="@layout/fragment_add_test" />
+        tools:layout="@layout/fragment_add_test" >
+        <action
+            android:id="@+id/openTestsFragmentAfterAddAction"
+            app:destination="@id/testsFragment"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="false" />
+    </fragment>
     <fragment
         android:id="@+id/testsFragment"
         android:name="com.example.covid19passportapp.View.TestsFragment"

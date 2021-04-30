@@ -1,6 +1,8 @@
 package com.example.covid19passportapp.Models;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class Test {
 
@@ -13,6 +15,11 @@ public class Test {
 
     public Test(int ID, DateTime date, String result) {
         this.ID = ID;
+        this.date = date;
+        this.result = result;
+    }
+
+    public Test(DateTime date, String result) {
         this.date = date;
         this.result = result;
     }

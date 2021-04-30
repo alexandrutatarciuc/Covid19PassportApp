@@ -9,4 +9,6 @@
     <string name="vaccine_type">Vaccine type</string>
     <string name="immune_until">Immune until</string>
     <string name="birthdate">Birthdate</string>
+    <string name="choose_test_result">Test result</string>
+    <string name="add_test">Add</string>
 </resources>
