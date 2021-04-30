@@ -63,7 +63,10 @@ public class TestsFragment extends Fragment {
 
         //RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 /*        TestsRecyclerAdapter newAdapter = new TestsRecyclerAdapter(getMockUpTests());
         recyclerView.setAdapter(newAdapter);*/
 
