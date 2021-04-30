@@ -28,4 +28,10 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="PageStyle">
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+    </style>
 </resources>
