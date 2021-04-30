@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,12 +110,14 @@ public class AddTestFragment extends Fragment {
         resultACT.setAdapter(resultTypesAdapter);
 
         addTestButton.setOnClickListener(v -> {
-            Log.d("BUTTON_PRESSED", dateInput.getText().toString().concat(resultACT.getText().toString()));
-
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
             DateTime dateTime = dtf.parseDateTime(dateInput.getText().toString());
             testsViewModel.addTest(new Test(dateTime, resultACT.getText().toString()));
-            NavHostFragment.findNavController(this).navigate(R.id.openTestsFragmentAfterAddAction);
+
+            /*Further research on the BackStack behaviour might be needed when more fragments will be added*/
+            NavHostFragment.findNavController(this).popBackStack(); //Pops AddTest Fragment
+            NavHostFragment.findNavController(this).popBackStack(); //Pops Out-Dated Tests Fragment
+            NavHostFragment.findNavController(this).navigate(R.id.testsFragment);
         });
 
 
