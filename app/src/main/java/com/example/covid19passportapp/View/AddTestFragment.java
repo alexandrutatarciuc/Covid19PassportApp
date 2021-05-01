@@ -101,9 +101,7 @@ public class AddTestFragment extends Fragment {
             dateInput.setText(selectedDate.toString("dd/MM/yyyy"));
         });
 
-        dateInput.setOnClickListener((v) -> {
-            datePicker.show(this.getParentFragmentManager(), "DATE_PICKER");
-        });
+        dateInput.setOnClickListener(v -> datePicker.show(this.getParentFragmentManager(), "DATE_PICKER"));
 
         resultTypes = new ArrayList<>();
         resultTypes.add("NEGATIVE");

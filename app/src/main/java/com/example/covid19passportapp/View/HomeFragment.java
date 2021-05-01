@@ -78,8 +78,15 @@ public class HomeFragment extends Fragment {
         if (passportViewModel.isPassportCreated()) {
             passportCreated.setVisibility(VISIBLE);
             passportNotCreated.setVisibility(GONE);
-        }
 
+            passportID.setText(passportViewModel.getPassport().getId());
+            fullName.setText(passportViewModel.getPassport().getFullName());
+            birthdate.setText(passportViewModel.getPassport().getBirthdate().toString("dd/MM/yyyy"));
+            country.setText(passportViewModel.getPassport().getCountry());
+            vaccinationDate.setText(passportViewModel.getPassport().getVaccinationDate().toString("dd/MM/yyyy"));
+            vaccineType.setText(passportViewModel.getPassport().getVaccineType());
+            immuneUntil.setText(passportViewModel.getPassport().getImmuneUntil().toString("dd/MM/yyyy"));
+        }
 
         return view;
     }

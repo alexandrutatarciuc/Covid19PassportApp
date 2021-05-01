@@ -6,7 +6,7 @@
         android:id="@+id/passportNotCreatedConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/passport_bg">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/passportNotCreatedTextView"
