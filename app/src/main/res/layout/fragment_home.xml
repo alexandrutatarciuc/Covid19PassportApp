@@ -4,14 +4,21 @@
     android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <include
-        layout="@layout/passport_not_created"/>
+        layout="@layout/passport_not_created" />
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/passportCreatedConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".View.HomeFragment"
+        android:visibility="gone"
         android:background="@drawable/passport_bg">
 
         <TextView
@@ -174,5 +181,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </ScrollView>

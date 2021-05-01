@@ -36,6 +36,7 @@ public class Repository {
         mockUpTests.add(new Test(10, DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(11, DateTime.now(), "NEGATIVE"));
         tests.setValue(mockUpTests);
+
     }
 
     public static synchronized Repository getInstance() {
@@ -59,5 +60,9 @@ public class Repository {
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public boolean isPassportCreated() {
+        return passport != null;
     }
 }
