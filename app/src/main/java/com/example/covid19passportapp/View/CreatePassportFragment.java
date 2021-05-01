@@ -152,8 +152,9 @@ public class CreatePassportFragment extends Fragment {
                     countryEditInput.getText().toString(), vaccineDate, vaccineTypeEditInput.getText().toString(), immuneUntil);
             passportViewModel.setPassport(createdPassport);
 
-            NavHostFragment.findNavController(this).popBackStack();
-            NavHostFragment.findNavController(this).popBackStack();
+            /*Further research on this way of solving BackStack behaviour might be needed when more fragments will be added*/
+            NavHostFragment.findNavController(this).popBackStack(); //Pops CreatePassportFragment
+            NavHostFragment.findNavController(this).popBackStack(); //Pops Out-Dated HomeFragment
             NavHostFragment.findNavController(this).navigate(R.id.homeFragment);
         });
 

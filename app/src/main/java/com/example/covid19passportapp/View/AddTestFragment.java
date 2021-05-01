@@ -125,6 +125,9 @@ public class AddTestFragment extends Fragment {
                     dateInput.requestFocus();
                     dateLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
                 }
+
+                if (!resultACT.getText().toString().isEmpty())
+                    resultACT.clearFocus();
             }
 
             @Override
