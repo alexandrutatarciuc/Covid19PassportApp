@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
 }
 
+//Google Services
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -46,4 +49,9 @@ dependencies {
 
     //JodaTime
     implementation 'net.danlew:android.joda:2.10.9.1'
+
+    //Google Services & Firebase
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
 }

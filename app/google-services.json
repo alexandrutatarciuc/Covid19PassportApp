@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "807372899122",
+    "project_id": "covid19passportapp",
+    "storage_bucket": "covid19passportapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807372899122:android:f958c78b7f89dbb8a98d2b",
+        "android_client_info": {
+          "package_name": "com.example.covid19passportapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807372899122-nsict3iug9543i394hsebk0ucfvllrmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq48Pei0_0ry03aDo-rx4KB43mj8jt7cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807372899122-nsict3iug9543i394hsebk0ucfvllrmv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
