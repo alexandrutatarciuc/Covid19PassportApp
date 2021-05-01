@@ -12,4 +12,5 @@
     <string name="choose_test_result">Rezultatul testului</string>
     <string name="add_test">Adauga</string>
     <string name="create_passport">Creeaza pasaport</string>
+    <string name="passport_not_created">Nu aveti pasaport COVID-19. Creati-va unul.</string>
 </resources>

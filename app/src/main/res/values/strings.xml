@@ -12,4 +12,5 @@
     <string name="choose_test_result">Test result</string>
     <string name="add_test">Add</string>
     <string name="create_passport">Create passport</string>
+    <string name="passport_not_created">You do not have a COVID-19 Passport. Please create one.</string>
 </resources>
