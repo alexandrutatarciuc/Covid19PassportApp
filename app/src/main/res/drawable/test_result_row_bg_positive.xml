@@ -6,7 +6,7 @@
         android:type="linear"
         android:angle="0"
         android:centerColor="@color/light_gray"
-        android:centerX="0.6"
+        android:centerX="0.7"
         android:startColor="@color/light_gray"
         android:endColor="@color/light_red" />
 </shape>
