@@ -14,10 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/date"
-        android:focusable="false"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-        app:endIconContentDescription="calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,6 +23,8 @@
             android:id="@+id/testDateEditInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="none"
+            android:focusableInTouchMode="false"
             android:focusable="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,6 +55,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/add_test"
         android:fontFamily="@font/poppins_extrabold"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@+id/testResultInput"
         app:layout_constraintTop_toBottomOf="@+id/testResultInput" />
 

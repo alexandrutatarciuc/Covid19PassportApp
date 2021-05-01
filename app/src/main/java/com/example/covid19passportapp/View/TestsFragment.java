@@ -70,6 +70,8 @@ public class TestsFragment extends Fragment {
 /*        TestsRecyclerAdapter newAdapter = new TestsRecyclerAdapter(getMockUpTests());
         recyclerView.setAdapter(newAdapter);*/
 
+
+
         return view;
     }
 

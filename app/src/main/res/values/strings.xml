@@ -11,4 +11,5 @@
     <string name="birthdate">Birthdate</string>
     <string name="choose_test_result">Test result</string>
     <string name="add_test">Add</string>
+    <string name="create_passport">Create passport</string>
 </resources>

@@ -8,6 +8,8 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,7 @@ public class AddTestFragment extends Fragment {
     private TestsViewModel testsViewModel;
 
     private MaterialDatePicker datePicker;
+    private TextInputLayout dateLayout;
     private TextInputEditText dateInput;
     private DateTime selectedDate;
     private AutoCompleteTextView resultACT;
@@ -65,6 +68,7 @@ public class AddTestFragment extends Fragment {
         //TestsViewModel
         testsViewModel = new ViewModelProvider(this).get(TestsViewModel.class);
 
+        dateLayout = view.findViewById(R.id.testDateInput);
         dateInput = view.findViewById(R.id.testDateEditInput);
         resultACT = view.findViewById(R.id.testResultInputAutoComplete);
         addTestButton = view.findViewById(R.id.addTestButton);
@@ -75,7 +79,7 @@ public class AddTestFragment extends Fragment {
                         .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                         .build();
 
-        //Redundant
+       /* //Redundant
         datePicker.addOnCancelListener((dialogInterface) -> {
             dateInput.clearFocus();
         });
@@ -85,16 +89,16 @@ public class AddTestFragment extends Fragment {
             dateInput.clearFocus();
         });
 
-        datePicker.addOnPositiveButtonClickListener((selection) -> {
-            selectedDate = new DateTime(selection);
-            dateInput.setText(selectedDate.toString("dd/MM/yyyy"));
-        });
-
         //Redundant
         dateInput.setOnFocusChangeListener((v1, s) -> {
             if (v1.getId() == R.id.testDateEditInput && s) {
                 datePicker.show(this.getParentFragmentManager(), "DATE_PICKER");
             }
+        });*/
+
+        datePicker.addOnPositiveButtonClickListener((selection) -> {
+            selectedDate = new DateTime(selection);
+            dateInput.setText(selectedDate.toString("dd/MM/yyyy"));
         });
 
         dateInput.setOnClickListener((v) -> {
@@ -109,12 +113,37 @@ public class AddTestFragment extends Fragment {
         resultTypesAdapter = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, resultTypes);
         resultACT.setAdapter(resultTypesAdapter);
 
+        //Validating input
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                addTestButton.setEnabled(!dateInput.getText().toString().isEmpty() && !resultACT.getText().toString().isEmpty());
+                if (!dateInput.getText().toString().isEmpty()) {
+                    dateInput.requestFocus();
+                    dateLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        dateInput.addTextChangedListener(textWatcher);
+        resultACT.addTextChangedListener(textWatcher);
+
         addTestButton.setOnClickListener(v -> {
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
             DateTime dateTime = dtf.parseDateTime(dateInput.getText().toString());
             testsViewModel.addTest(new Test(dateTime, resultACT.getText().toString()));
 
-            /*Further research on the BackStack behaviour might be needed when more fragments will be added*/
+            /*Further research on this way of solving BackStack behaviour might be needed when more fragments will be added*/
             NavHostFragment.findNavController(this).popBackStack(); //Pops AddTest Fragment
             NavHostFragment.findNavController(this).popBackStack(); //Pops Out-Dated Tests Fragment
             NavHostFragment.findNavController(this).navigate(R.id.testsFragment);

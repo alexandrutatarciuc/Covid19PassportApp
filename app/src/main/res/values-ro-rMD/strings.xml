@@ -11,4 +11,5 @@
     <string name="birthdate">Data nasterii</string>
     <string name="choose_test_result">Rezultatul testului</string>
     <string name="add_test">Adauga</string>
+    <string name="create_passport">Creeaza pasaport</string>
 </resources>
