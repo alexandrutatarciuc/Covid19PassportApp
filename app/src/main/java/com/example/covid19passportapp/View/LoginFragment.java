@@ -80,7 +80,18 @@ public class LoginFragment extends Fragment {
     }
 
     private void login() {
-        ((MainActivity)getActivity()).goToMain();
+        try {
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(logInTask -> {
+                if (logInTask.isSuccessful()) {
+                    Toast.makeText(getContext(), "User successfully logged in", Toast.LENGTH_LONG).show();
+                    ((MainActivity) getActivity()).goToMain();
+                } else {
+                    Toast.makeText(getContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void registerForward() {
