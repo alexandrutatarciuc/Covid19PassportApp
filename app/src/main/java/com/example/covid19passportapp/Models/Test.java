@@ -6,7 +6,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class Test {
 
-    private int ID;
+
     private DateTime date;
     private String result;
 
@@ -14,7 +14,6 @@ public class Test {
     }
 
     public Test(int ID, DateTime date, String result) {
-        this.ID = ID;
         this.date = date;
         this.result = result;
     }
@@ -22,14 +21,6 @@ public class Test {
     public Test(DateTime date, String result) {
         this.date = date;
         this.result = result;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public DateTime getDate() {

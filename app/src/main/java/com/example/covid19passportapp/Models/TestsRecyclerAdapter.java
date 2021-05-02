@@ -34,7 +34,7 @@ public class TestsRecyclerAdapter extends RecyclerView.Adapter<TestsRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull TestsRecyclerAdapter.ViewHolder holder, int position) {
         Test test = tests.get(position);
-        holder.id.setText(String.valueOf(test.getID()));
+        holder.id.setText(String.valueOf(++position));
         holder.date.setText(test.getDate().toString("dd/MM/yy"));
         holder.result.setText(test.getResult());
         if (test.getResult().equalsIgnoreCase("positive")) {

@@ -24,17 +24,17 @@ public class Repository {
     {
         tests = new MutableLiveData<>();
         List<Test> mockUpTests = new ArrayList<Test>();
-        mockUpTests.add(new Test(1, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(2, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(3, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(4, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(5, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(6, DateTime.now(), "UNKNOWN"));
-        mockUpTests.add(new Test(7, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(8, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(9, DateTime.now(), "POSITIVE"));
-        mockUpTests.add(new Test(10, DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(11, DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test( DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test( DateTime.now(), "UNKNOWN"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test( DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "POSITIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         tests.setValue(mockUpTests);
 
     }
@@ -50,7 +50,7 @@ public class Repository {
     }
 
     public void addTest(Test test) {
-        test.setID( Objects.requireNonNull(tests.getValue()).get(tests.getValue().size() - 1).getID() + 1); //sets id (last id + 1)
+        //test.setID( Objects.requireNonNull(tests.getValue()).get(tests.getValue().size() - 1).getID() + 1); //sets id (last id + 1)
         Objects.requireNonNull(tests.getValue()).add(test);
     }
 
