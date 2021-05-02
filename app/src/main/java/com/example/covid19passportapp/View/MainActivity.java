@@ -1,5 +1,6 @@
 package com.example.covid19passportapp.View;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -35,12 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(drawerLayout).build();
 
-        navigationView.setItemIconTintList(null);
-
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //Allows navigation to destinations when clicking menu items in the navigation drawer
         NavigationUI.setupWithNavController(navigationView, navController);
-
 
     }
 

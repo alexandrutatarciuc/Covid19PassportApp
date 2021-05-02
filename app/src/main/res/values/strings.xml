@@ -13,4 +13,10 @@
     <string name="add_test">Add</string>
     <string name="create_passport">Create passport</string>
     <string name="passport_not_created">You do not have a COVID-19 Passport. Please create one.</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="register">Register</string>
+    <string name="or">OR</string>
+    <string name="go_back">Go back</string>
 </resources>

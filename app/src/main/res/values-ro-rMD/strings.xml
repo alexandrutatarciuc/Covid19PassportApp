@@ -13,4 +13,9 @@
     <string name="add_test">Adauga</string>
     <string name="create_passport">Creeaza pasaport</string>
     <string name="passport_not_created">Nu aveti pasaport COVID-19. Creati-va unul.</string>
+    <string name="password">Parola</string>
+    <string name="log_in">Logheaza-te</string>
+    <string name="register">Inregistreaza-te</string>
+    <string name="or">SAU</string>
+    <string name="go_back">Intoarce-te</string>
 </resources>
