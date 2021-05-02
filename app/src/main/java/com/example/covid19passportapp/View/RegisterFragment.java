@@ -72,7 +72,7 @@ public class RegisterFragment extends Fragment {
 
     private void backToLogin() {
         NavHostFragment.findNavController(this).popBackStack();
-        NavHostFragment.findNavController(this).popBackStack();
-        NavHostFragment.findNavController(this).navigate(R.id.loginFragment);
+       /* NavHostFragment.findNavController(this).popBackStack();
+        NavHostFragment.findNavController(this).navigate(R.id.loginFragment);*/
     }
 }

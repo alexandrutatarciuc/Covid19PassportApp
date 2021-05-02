@@ -19,4 +19,6 @@
     <string name="register">Register</string>
     <string name="or">OR</string>
     <string name="go_back">Go back</string>
+    <string name="create_account">Create account</string>
+    <string name="sign_in">Sign in</string>
 </resources>

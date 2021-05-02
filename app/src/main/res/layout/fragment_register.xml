@@ -6,7 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".View.RegisterFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        android:fontFamily="@font/poppins_extrabold"
+        android:textSize="30sp"
+        android:textColor="@color/royal_blue"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
@@ -66,15 +78,15 @@
 
         <Button
             android:id="@+id/goBackToLoginButton"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/go_back"
-            style="?attr/materialButtonOutlinedStyle"
+            android:fontFamily="@font/poppins_extrabold"
+            android:text="@string/log_in"
             app:icon="@drawable/go_back_icon"
             app:iconPadding="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/registerButton"/>
+            app:layout_constraintTop_toBottomOf="@id/registerButton" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

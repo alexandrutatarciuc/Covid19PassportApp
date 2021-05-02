@@ -18,4 +18,6 @@
     <string name="register">Inregistreaza-te</string>
     <string name="or">SAU</string>
     <string name="go_back">Intoarce-te</string>
+    <string name="create_account">Creeaza cont</string>
+    <string name="sign_in">Logare</string>
 </resources>
