@@ -25,6 +25,14 @@ public class Passport {
         this.immuneUntil = immuneUntil;
     }
 
+    public Passport(String id, String country, DateTime vaccinationDate, String vaccineType, DateTime immuneUntil) {
+        this.id = id;
+        this.country = country;
+        this.vaccinationDate = vaccinationDate;
+        this.vaccineType = vaccineType;
+        this.immuneUntil = immuneUntil;
+    }
+
     public String getId() {
         return id;
     }

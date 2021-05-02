@@ -65,6 +65,46 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerFullNameInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/full_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerPasswordInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerFullNameEditInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerBirthdateInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/birthdate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerFullNameInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerBirthdateEditInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
@@ -72,9 +112,10 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_extrabold"
             android:text="@string/register"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/registerPasswordInput" />
+            app:layout_constraintTop_toBottomOf="@id/registerBirthdateInput" />
 
         <Button
             android:id="@+id/goBackToLoginButton"
@@ -84,7 +125,6 @@
             android:fontFamily="@font/poppins_extrabold"
             android:text="@string/log_in"
             app:icon="@drawable/go_back_icon"
-            app:iconPadding="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/registerButton" />
 
