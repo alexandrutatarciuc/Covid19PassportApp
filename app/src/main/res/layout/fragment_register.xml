@@ -68,7 +68,7 @@
             android:id="@+id/goBackToLoginButton"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:fontFamily="@font/poppins_extrabold"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/go_back"
             style="?attr/materialButtonOutlinedStyle"
             app:icon="@drawable/go_back_icon"
