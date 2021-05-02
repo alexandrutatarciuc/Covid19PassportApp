@@ -71,6 +71,7 @@ public class RegisterFragment extends Fragment {
 
         registerButton.setOnClickListener(v -> register());
         backToLoginButton.setOnClickListener(v -> backToLogin());
+        birthdateInput.setOnClickListener(v -> birthdateDatePicker.show(this.getParentFragmentManager(), "BIRTHDATE_PICKER"));
 
         birthdateDatePicker.addOnPositiveButtonClickListener((selection) -> {
             DateTime selectedDate = new DateTime(selection);
