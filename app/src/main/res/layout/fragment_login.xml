@@ -60,6 +60,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_extrabold"
             android:text="@string/log_in"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginPasswordInput" />
