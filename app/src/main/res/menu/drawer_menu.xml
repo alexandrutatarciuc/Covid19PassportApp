@@ -8,5 +8,8 @@
         <item
             android:id="@+id/testsFragment"
             android:title="See my tests" />
+        <item
+            android:id="@+id/logOut"
+            android:title="Log out" />
     </group>
 </menu>
