@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
-//Google Services
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 30
@@ -55,6 +55,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
+    //implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation 'com.google.firebase:firebase-database'
 
 
 }
+
+//Google Services
+apply plugin: 'com.google.gms.google-services'

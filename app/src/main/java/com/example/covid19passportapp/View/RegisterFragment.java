@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.covid19passportapp.Models.Citizen;
 import com.example.covid19passportapp.R;
 import com.example.covid19passportapp.ViewModel.CitizenViewModel;
 import com.example.covid19passportapp.ViewModel.PassportViewModel;
@@ -22,8 +23,12 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 
 public class RegisterFragment extends Fragment {
@@ -117,6 +122,10 @@ public class RegisterFragment extends Fragment {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), "User successfully registered", Toast.LENGTH_SHORT).show();
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+                    DateTime birthdate = dtf.parseDateTime(birthdateInput.getText().toString());
+                    citizenViewModel.addCitizen(new Citizen(fullNameInput.getText().toString(), birthdate));
+                    Log.d("REGISTER_FRAGMENT","I GOT HERE");
                     backToLogin();
                 } else {
                     Log.d("REGISTER", task.getException().getMessage());

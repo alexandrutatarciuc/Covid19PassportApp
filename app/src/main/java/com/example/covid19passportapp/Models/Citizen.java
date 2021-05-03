@@ -2,6 +2,7 @@ package com.example.covid19passportapp.Models;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Citizen {
@@ -19,6 +20,13 @@ public class Citizen {
         this.birthdate = birthdate;
         this.passport = passport;
         this.tests = tests;
+    }
+
+    public Citizen(String fullName, DateTime birthdate) {
+        this.fullName = fullName;
+        this.birthdate = birthdate;
+        passport = new Passport();
+        tests = new ArrayList<>();
     }
 
     public String getFullName() {
@@ -51,5 +59,15 @@ public class Citizen {
 
     public void setTests(List<Test> tests) {
         this.tests = tests;
+    }
+
+    @Override
+    public String toString() {
+        return "Citizen{" +
+                "fullName='" + fullName + '\'' +
+                ", birthdate=" + birthdate +
+                ", passport=" + passport +
+                ", tests=" + tests +
+                '}';
     }
 }

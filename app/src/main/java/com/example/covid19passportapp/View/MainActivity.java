@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.covid19passportapp.R;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setOnMenuItemClickListener(l -> {
             FirebaseAuth.getInstance().signOut();
-            
+
             //Reloading the activity
             //goToLogin not working
             //TODO further research

@@ -1,11 +1,16 @@
 package com.example.covid19passportapp.Persistence;
 
+import android.util.Log;
+
 import androidx.constraintlayout.solver.Cache;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.covid19passportapp.Models.Citizen;
 import com.example.covid19passportapp.Models.Passport;
 import com.example.covid19passportapp.Models.Test;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.joda.time.DateTime;
 
@@ -15,6 +20,9 @@ import java.util.Objects;
 
 public class Repository {
 
+
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final DatabaseReference rootRef = database.getReference("covid19passportapp-default-rtdb");
     private static Repository instance;
 
     private MutableLiveData<List<Test>> tests;
@@ -37,6 +45,7 @@ public class Repository {
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         tests.setValue(mockUpTests);
 
+        //database
     }
 
     public static synchronized Repository getInstance() {
@@ -64,5 +73,11 @@ public class Repository {
 
     public boolean isPassportCreated() {
         return passport != null;
+    }
+
+    public void addCitizen(Citizen citizen) {
+        rootRef.child("citizens").push().setValue(citizen);
+        Log.d("REPOSITORY",citizen.toString());
+        Log.d("REPOSITORY","I GOT HERE");
     }
 }
