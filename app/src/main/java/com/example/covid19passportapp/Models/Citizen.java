@@ -1,5 +1,7 @@
 package com.example.covid19passportapp.Models;
 
+import com.google.firebase.database.Exclude;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -8,9 +10,11 @@ import java.util.List;
 public class Citizen {
 
     private String fullName;
+    @Exclude
     private DateTime birthdate;
     private Passport passport;
     private List<Test> tests;
+    private long birthdateMilis;
 
     public Citizen() {
     }
@@ -37,6 +41,7 @@ public class Citizen {
         this.fullName = fullName;
     }
 
+    @Exclude
     public DateTime getBirthdate() {
         return birthdate;
     }
@@ -59,6 +64,14 @@ public class Citizen {
 
     public void setTests(List<Test> tests) {
         this.tests = tests;
+    }
+
+    public long getBirthdateMilis() {
+        return birthdateMilis;
+    }
+
+    public void setBirthdateMilis(long birthdateMilis) {
+        this.birthdateMilis = birthdateMilis;
     }
 
     @Override

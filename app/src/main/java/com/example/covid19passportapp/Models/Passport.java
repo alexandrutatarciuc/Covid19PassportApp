@@ -33,6 +33,10 @@ public class Passport {
         this.immuneUntil = immuneUntil;
     }
 
+    public Passport(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
