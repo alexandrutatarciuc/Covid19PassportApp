@@ -69,12 +69,15 @@ public class MainActivity extends AppCompatActivity {
     public void goToMain() {
         //TODO
         setContentView(R.layout.activity_main);
+        //setTitle(R.string.app_name);
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setOnMenuItemClickListener(l -> {
             FirebaseAuth.getInstance().signOut();
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(drawerLayout).build();
 
+        //setSupportActionBar(toolbar);
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //Allows navigation to destinations when clicking menu items in the navigation drawer
         NavigationUI.setupWithNavController(navigationView, navController);

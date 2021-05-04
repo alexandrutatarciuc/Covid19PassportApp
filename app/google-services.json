@@ -1,18 +1,27 @@
 {
   "project_info": {
     "project_number": "807372899122",
+    "firebase_url": "https://covid19passportapp-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "covid19passportapp",
     "storage_bucket": "covid19passportapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807372899122:android:f958c78b7f89dbb8a98d2b",
+        "mobilesdk_app_id": "1:807372899122:android:b1f8bbac34d784d9a98d2b",
         "android_client_info": {
           "package_name": "com.example.covid19passportapp"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "807372899122-cd6rnvd8hnepve7t8hh8rvmom8p2ls00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.covid19passportapp",
+            "certificate_hash": "2eead9ee426561ed0978a3be47908b2aabeea9a1"
+          }
+        },
         {
           "client_id": "807372899122-nsict3iug9543i394hsebk0ucfvllrmv.apps.googleusercontent.com",
           "client_type": 3

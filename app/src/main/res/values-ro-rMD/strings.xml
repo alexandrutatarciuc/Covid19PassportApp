@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Covid19PassportApp</string>
+    <string name="app_name">Pasaport Covid-19</string>
     <string name="hello_blank_fragment">Salut, fisier gol</string>
     <string name="passport_id">ID</string>
     <string name="full_name">Nume</string>
@@ -20,4 +20,7 @@
     <string name="go_back">Intoarce-te</string>
     <string name="create_account">Creeaza cont</string>
     <string name="sign_in">Logare</string>
+    <string name="english">Engleza</string>
+    <string name="romanian">Romana</string>
+    <string name="danish">Daneza</string>
 </resources>

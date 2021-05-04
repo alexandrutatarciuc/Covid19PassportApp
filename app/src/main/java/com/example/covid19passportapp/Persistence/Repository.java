@@ -2,6 +2,8 @@ package com.example.covid19passportapp.Persistence;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.solver.Cache;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,8 +11,12 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.covid19passportapp.Models.Citizen;
 import com.example.covid19passportapp.Models.Passport;
 import com.example.covid19passportapp.Models.Test;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 
 import org.joda.time.DateTime;
 
@@ -21,31 +27,32 @@ import java.util.Objects;
 public class Repository {
 
 
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private final DatabaseReference rootRef = database.getReference("covid19passportapp-default-rtdb");
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference rootRef;
     private static Repository instance;
 
     private MutableLiveData<List<Test>> tests;
     private Passport passport;
 
-    private Repository()
-    {
+    private Repository() {
         tests = new MutableLiveData<>();
         List<Test> mockUpTests = new ArrayList<Test>();
-        mockUpTests.add(new Test( DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test( DateTime.now(), "UNKNOWN"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test( DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "UNKNOWN"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
+        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "POSITIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         tests.setValue(mockUpTests);
 
-        //database
+        database.setLogLevel(Logger.Level.DEBUG);
+        database.setPersistenceEnabled(true);
+        rootRef = database.getReference("covid19passportapp-default-rtdb");
     }
 
     public static synchronized Repository getInstance() {
@@ -76,8 +83,24 @@ public class Repository {
     }
 
     public void addCitizen(Citizen citizen) {
-        rootRef.child("citizens").push().setValue(citizen);
-        Log.d("REPOSITORY",citizen.toString());
-        Log.d("REPOSITORY","I GOT HERE");
+        Citizen newCitizen = new Citizen();
+
+        database.goOffline();
+        database.goOnline();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference db = rootRef.child("citizens").child(user.getUid());
+        db.setValue(newCitizen, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (error == null) {
+                    Log.d("FIREBASE", "success");
+                } else {
+                    Log.d("FIREBASE", error.toString());
+                }
+            }
+        });
+        Log.d("REPOSITORY", citizen.toString());
+        Log.d("REPOSITORY", "I GOT HERE");
     }
 }

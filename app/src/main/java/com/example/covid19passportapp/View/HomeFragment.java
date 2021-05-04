@@ -2,12 +2,16 @@ package com.example.covid19passportapp.View;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +25,7 @@ import org.w3c.dom.Text;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static android.view.View.inflate;
 
 
 public class HomeFragment extends Fragment {
@@ -49,8 +54,8 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -90,4 +95,11 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.language_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+    
 }

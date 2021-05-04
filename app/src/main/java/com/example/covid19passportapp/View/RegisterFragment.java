@@ -121,7 +121,7 @@ public class RegisterFragment extends Fragment {
         try {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), "User successfully registered", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "User successfully registered", Toast.LENGTH_SHORT).show();
                     DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
                     DateTime birthdate = dtf.parseDateTime(birthdateInput.getText().toString());
                     citizenViewModel.addCitizen(new Citizen(fullNameInput.getText().toString(), birthdate));
