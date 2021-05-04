@@ -101,5 +101,5 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.language_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-    
+
 }
