@@ -5,18 +5,18 @@ I decided to stop enduring the effects of the pandemic and start to act. Besides
 Requirements:
 
 Must have:
-  [x] Option of adding a passport
-  [x] Display of the passport [ ] Generation of QR which links to the ID of the document
-  [x] Option of adding COVID-19 tests
-  [x] Display of the added COVID-19 tests
+- [x] Option of adding a passport
+- [x] Display of the passport [ ] Generation of QR which links to the ID of the document
+- [x] Option of adding COVID-19 tests
+- [x] Display of the added COVID-19 tests
 
 Should have:
-  [x] Log in option
-  [ ] Option of changing language
+- [x] Log in option
+- [ ] Option of changing language
    
 Could have:
-  [ ] Graphs that will display statistics of COVID-19 cases
-  [ ] Option of advising the user to take a test in days with unusual high amount of cases
+- [ ] Graphs that will display statistics of COVID-19 cases
+- [ ] Option of advising the user to take a test in days with unusual high amount of cases
 
 Won't have:
    * Loging in using NemID
