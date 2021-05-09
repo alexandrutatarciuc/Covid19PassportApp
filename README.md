@@ -6,8 +6,7 @@ Requirements:
 
 Must have:
   [x] Option of adding a passport
-  [x] Display of the passport
-  [ ] Generation of QR which links to the ID of the document
+  [x] Display of the passport [ ] Generation of QR which links to the ID of the document
   [x] Option of adding COVID-19 tests
   [x] Display of the added COVID-19 tests
 
