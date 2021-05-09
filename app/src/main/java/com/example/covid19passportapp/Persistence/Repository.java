@@ -24,22 +24,32 @@ import com.google.firebase.database.ValueEventListener;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Repository {
 
-
-    private FirebaseDatabase database = FirebaseDatabase.getInstance("https://covid19passportapp-default-rtdb.europe-west1.firebasedatabase.app/");
-    private DatabaseReference rootRef;
     private static Repository instance;
 
+    private final FirebaseUser currentUser;
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://covid19passportapp-default-rtdb.europe-west1.firebasedatabase.app/");
+    private final DatabaseReference rootRef;
+
+    private MutableLiveData<Citizen> citizen;
+    private MutableLiveData<Passport> passport;
     private MutableLiveData<List<Test>> tests;
-    private Passport passport;
+    private MutableLiveData<String> fullName;
+    private MutableLiveData<DateTime> birthdate;
 
     private Repository() {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        citizen = new MutableLiveData<>();
+        passport = new MutableLiveData<>();
+        fullName = new MutableLiveData<>();
+        birthdate = new MutableLiveData<>();
         tests = new MutableLiveData<>();
-        List<Test> mockUpTests = new ArrayList<Test>();
+        /*List<Test> mockUpTests = new ArrayList<Test>();
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
@@ -51,11 +61,13 @@ public class Repository {
         mockUpTests.add(new Test(DateTime.now(), "POSITIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
         mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        tests.setValue(mockUpTests);
+        tests.setValue(mockUpTests);*/
 
-        database.setLogLevel(Logger.Level.DEBUG);
-        //database.setPersistenceEnabled(true);
+        database.setLogLevel(Logger.Level.DEBUG);   //Debugging Firebase
+        database.setPersistenceEnabled(true);   //Enabling Offline Persistence
         rootRef = database.getReference();
+
+        listenToCitizensDataUpdates();
     }
 
     public static synchronized Repository getInstance() {
@@ -64,58 +76,63 @@ public class Repository {
         return instance;
     }
 
+    public LiveData<String> getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName.setValue(fullName);
+    }
+
+    public LiveData<DateTime> getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(DateTime birthdate) {
+        this.birthdate.setValue(birthdate);
+    }
+
     public LiveData<List<Test>> getTests() {
         return tests;
     }
 
     public void addTest(Test test) {
-        //test.setID( Objects.requireNonNull(tests.getValue()).get(tests.getValue().size() - 1).getID() + 1); //sets id (last id + 1)
         Objects.requireNonNull(tests.getValue()).add(test);
     }
 
-    public Passport getPassport() {
+    public LiveData<Passport> getPassport() {
         return passport;
     }
 
     public void setPassport(Passport passport) {
-        this.passport = passport;
+        this.passport.setValue(passport);
     }
 
     public boolean isPassportCreated() {
-        return passport != null;
+        return passport.getValue() != null;
+    }
+
+    public LiveData<Citizen> getCitizen() {
+        return citizen;
     }
 
     public void addCitizen(Citizen citizen) {
-        Citizen newCitizen = new Citizen();
-        newCitizen.setFullName(citizen.getFullName());
-
+        //Setting DateTime birthdate
         citizen.setBirthdateMilis(citizen.getBirthdate().getMillis());
-        /*database.goOffline();
-        database.goOnline();*/
 
+        //Updating fullName and birthdate
+        fullName.setValue(citizen.getFullName());
+        birthdate.setValue(citizen.getBirthdate());
 
+        //Reference to the current user
+        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference db = rootRef.child("citizens").child(user.getUid());
-
-        db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Citizen c = snapshot.getValue(Citizen.class);
-                c.setBirthdate(new DateTime(c.getBirthdateMilis()));
-                Log.d("FIREBASE_DATA_VALUE", c.getBirthdate().toString("dd/MM/yyyy"));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        //Adding to the Firebase Realtime Database
         db.setValue(citizen, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 if (error == null) {
+
                     Log.d("FIREBASE", "success");
                 } else {
                     Log.d("FIREBASE", error.toString());
@@ -123,7 +140,57 @@ public class Repository {
             }
         });
 
+        //Updating Livedata
+        this.citizen.setValue(citizen);
+    }
 
+    private void listenToCitizensDataUpdates() {
+        //Reference to the current user
+        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
 
+        db.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                //TODO maybe needs to be handled to set MutableLiveData for tests
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String dataModified = snapshot.getKey();
+
+                switch (dataModified) {
+                    case "fullName":
+                        fullName.setValue((String) snapshot.getValue());
+                        break;
+                    case "birthdate":
+                        birthdate.setValue((DateTime) snapshot.getValue());
+                        break;
+                    case "passport":
+                        passport.setValue((Passport) snapshot.getValue());
+                        break;
+                    case "tests":
+                        tests.setValue((List<Test>) snapshot.getValue());
+                        break;
+                    default:
+                        Log.wtf("REPOSITORY", "Data not recognized");
+                        break;
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

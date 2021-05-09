@@ -15,7 +15,7 @@ public class Passport {
     public Passport() {
     }
 
-    public Passport(String id, String fullName, DateTime birthdate, String country, DateTime vaccinationDate, String vaccineType, DateTime immuneUntil) {
+    /*public Passport(String id, String fullName, DateTime birthdate, String country, DateTime vaccinationDate, String vaccineType, DateTime immuneUntil) {
         this.id = id;
         this.fullName = fullName;
         this.birthdate = birthdate;
@@ -23,7 +23,7 @@ public class Passport {
         this.vaccinationDate = vaccinationDate;
         this.vaccineType = vaccineType;
         this.immuneUntil = immuneUntil;
-    }
+    }*/
 
     public Passport(String id, String country, DateTime vaccinationDate, String vaccineType, DateTime immuneUntil) {
         this.id = id;

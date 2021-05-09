@@ -67,6 +67,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createPassportFullNameEditInput"
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -92,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:enabled="false"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>

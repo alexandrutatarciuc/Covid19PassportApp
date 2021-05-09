@@ -1,5 +1,6 @@
 package com.example.covid19passportapp.ViewModel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.covid19passportapp.Models.Passport;
@@ -13,7 +14,7 @@ public class PassportViewModel extends ViewModel {
         repository = Repository.getInstance();
     }
 
-    public Passport getPassport() {
+    public LiveData<Passport> getPassport() {
         return repository.getPassport();
     }
 

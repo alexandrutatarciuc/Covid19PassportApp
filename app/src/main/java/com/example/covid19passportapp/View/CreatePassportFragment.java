@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import com.example.covid19passportapp.Models.Passport;
 import com.example.covid19passportapp.R;
+import com.example.covid19passportapp.ViewModel.CitizenViewModel;
 import com.example.covid19passportapp.ViewModel.PassportViewModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
@@ -27,6 +28,7 @@ import org.joda.time.format.DateTimeFormatter;
 public class CreatePassportFragment extends Fragment {
 
     private PassportViewModel passportViewModel;
+    private CitizenViewModel citizenViewModel;
 
     private MaterialDatePicker birthdateDatePicker;
     private MaterialDatePicker vaccinationDateDatePicker;
@@ -60,6 +62,7 @@ public class CreatePassportFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_passport, container, false);
 
         passportViewModel = new ViewModelProvider(this).get(PassportViewModel.class);
+        citizenViewModel = new ViewModelProvider(this).get(CitizenViewModel.class);
 
         IDEditInput = view.findViewById(R.id.createPassportIDEditInput);
         fullNameEditInput = view.findViewById(R.id.createPassportFullNameEditInput);
@@ -69,11 +72,6 @@ public class CreatePassportFragment extends Fragment {
         vaccineDateEditInput = view.findViewById(R.id.createPassportVaccineDateEditInput);
         immuneUntilEditInput = view.findViewById(R.id.createPassportImmuneUntilEditInput);
         createPassportButton = view.findViewById(R.id.createPassportButton);
-
-        birthdateDatePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Birthdate")
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .build();
 
         vaccinationDateDatePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Vaccination Date")
@@ -85,14 +83,9 @@ public class CreatePassportFragment extends Fragment {
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .build();
 
-        birthdateEditInput.setOnClickListener(v -> birthdateDatePicker.show(this.getParentFragmentManager(), "BIRTHDATE_PICKER"));
         vaccineDateEditInput.setOnClickListener(v -> vaccinationDateDatePicker.show(this.getParentFragmentManager(), "VACCINATION_DATE_PICKER"));
         immuneUntilEditInput.setOnClickListener(v -> immuneUntilDatePicker.show(this.getParentFragmentManager(), "IMMUNE_UNTIL_DATE_PICKER"));
 
-        birthdateDatePicker.addOnPositiveButtonClickListener((selection) -> {
-            DateTime selectedDate = new DateTime(selection);
-            birthdateEditInput.setText(selectedDate.toString("dd/MM/yyyy"));
-        });
 
         vaccinationDateDatePicker.addOnPositiveButtonClickListener((selection) -> {
             DateTime selectedDate = new DateTime(selection);
@@ -104,6 +97,9 @@ public class CreatePassportFragment extends Fragment {
             immuneUntilEditInput.setText(selectedDate.toString("dd/MM/yyyy"));
         });
 
+        citizenViewModel.getFullName().observe(getViewLifecycleOwner(), (fullName) -> fullNameEditInput.setText(fullName));
+        citizenViewModel.getBirthdate().observe(getViewLifecycleOwner(), (birthdate) -> birthdateEditInput.setText(birthdate.toString("dd/MM/yyyy")));
+
         //Validating input
         TextWatcher textWatcher = new TextWatcher() {
             @Override
@@ -114,14 +110,11 @@ public class CreatePassportFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean isCompletedID = !IDEditInput.getText().toString().isEmpty();
-                boolean isCompletedFullName = !fullNameEditInput.getText().toString().isEmpty();
-                boolean isCompletedBirthdate = !birthdateEditInput.getText().toString().isEmpty();
                 boolean isCompletedCountry = !countryEditInput.getText().toString().isEmpty();
                 boolean isCompletedVaccineType = !vaccineTypeEditInput.getText().toString().isEmpty();
                 boolean isCompletedVaccineDate = !vaccineDateEditInput.getText().toString().isEmpty();
                 boolean isCompletedImmuneUntil = !immuneUntilEditInput.getText().toString().isEmpty();
-                boolean setEnabled = isCompletedID && isCompletedFullName && isCompletedBirthdate && isCompletedCountry &&
-                        isCompletedVaccineType && isCompletedVaccineDate && isCompletedImmuneUntil;
+                boolean setEnabled = isCompletedID && isCompletedCountry && isCompletedVaccineType && isCompletedVaccineDate && isCompletedImmuneUntil;
 
                 createPassportButton.setEnabled(setEnabled);
             }
@@ -144,12 +137,11 @@ public class CreatePassportFragment extends Fragment {
         //ButtonOnClick
         createPassportButton.setOnClickListener(v -> {
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-            DateTime birthdate = dtf.parseDateTime(birthdateEditInput.getText().toString());
             DateTime vaccineDate = dtf.parseDateTime(vaccineDateEditInput.getText().toString());
             DateTime immuneUntil = dtf.parseDateTime(immuneUntilEditInput.getText().toString());
 
-            Passport createdPassport = new Passport(IDEditInput.getText().toString(), fullNameEditInput.getText().toString(), birthdate,
-                    countryEditInput.getText().toString(), vaccineDate, vaccineTypeEditInput.getText().toString(), immuneUntil);
+            Passport createdPassport = new Passport(IDEditInput.getText().toString(), countryEditInput.getText().toString(),
+                    vaccineDate, vaccineTypeEditInput.getText().toString(), immuneUntil);
             passportViewModel.setPassport(createdPassport);
 
             /*Further research on this way of solving BackStack behaviour might be needed when more fragments will be added*/

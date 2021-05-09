@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="49a7bYD9Kj"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@id/passportIDTextView"
@@ -84,7 +84,7 @@
             android:id="@+id/fullNameValue"
             style="@style/PassportValue"
             android:layout_marginTop="12dp"
-            android:text="Joe Smith"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPersonal" />
 
@@ -98,7 +98,7 @@
         <TextView
             android:id="@+id/birthdateValue"
             style="@style/PassportValue"
-            android:text="15/01/2000"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullNameValue" />
 
@@ -133,7 +133,7 @@
             android:id="@+id/countryValue"
             style="@style/PassportValue"
             android:layout_marginTop="12dp"
-            android:text="Denmark"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayoutVaccine" />
 
@@ -147,7 +147,7 @@
         <TextView
             android:id="@+id/vaccineDateValue"
             style="@style/PassportValue"
-            android:text="12/03/2021"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/countryValue" />
 
@@ -161,7 +161,7 @@
         <TextView
             android:id="@+id/vaccineTypeValue"
             style="@style/PassportValue"
-            android:text="Pfizer"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vaccineDateValue" />
 
@@ -175,7 +175,7 @@
         <TextView
             android:id="@+id/immuneUntilValue"
             style="@style/PassportValue"
-            android:text="12/03/2023"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vaccineTypeValue" />
 
