@@ -11,17 +11,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <!--<include
-        android:id="@+id/includePassportNotCreated"
-        layout="@layout/passport_not_created"
-        android:visibility="gone"/>-->
+    <include
+        layout="@layout/passport_not_created" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/passportCreatedConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".View.HomeFragment"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@drawable/passport_bg">
 
         <TextView
@@ -186,7 +184,7 @@
             android:id="@+id/qrCodeImageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src=""
+            android:src="@drawable/"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -17,8 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.covid19passportapp.Models.Passport;
 import com.example.covid19passportapp.R;
 import com.example.covid19passportapp.ViewModel.CitizenViewModel;
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment {
     private TextView vaccinationDate;
     private TextView vaccineType;
     private TextView immuneUntil;
+    private ImageView qrCode;
 
 
     public HomeFragment() {
@@ -85,11 +88,10 @@ public class HomeFragment extends Fragment {
         vaccinationDate  = view.findViewById(R.id.vaccineDateValue);
         vaccineType = view.findViewById(R.id.vaccineTypeValue);
         immuneUntil = view.findViewById(R.id.immuneUntilValue);
+        qrCode = view.findViewById(R.id.qrCodeImageView);
 
         citizenViewModel.getFullName().observe(getViewLifecycleOwner(), (fullName) -> this.fullName.setText(fullName));
         citizenViewModel.getBirthdate().observe(getViewLifecycleOwner(), (birthdate) -> this.birthdate.setText(birthdate.toString("dd/MM/yyyy")));
-
-        Log.d("HOMEFRAGMENT", "passportViewModel.isPassportCreated():" + passportViewModel.isPassportCreated());
 
         passportViewModel.isPassportCreated().observe(getViewLifecycleOwner(), (c) -> {
             if (c) {
@@ -103,6 +105,7 @@ public class HomeFragment extends Fragment {
                     vaccinationDate.setText(passport.getVaccinationDate().toString("dd/MM/yyyy"));
                     vaccineType.setText(passport.getVaccineType());
                     immuneUntil.setText(passport.getImmuneUntil().toString("dd/MM/yyyy"));
+                    Glide.with(getActivity()).load(passportViewModel.getQrCodeUrl(passport)).into(qrCode);
                 };
                 passportViewModel.getPassport().observe(getViewLifecycleOwner(), passportObserver);
             }

@@ -1,6 +1,7 @@
 package com.example.covid19passportapp.ViewModel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.covid19passportapp.Models.Passport;
@@ -26,4 +27,7 @@ public class PassportViewModel extends ViewModel {
         return repository.isPassportCreated();
     }
 
+    public String getQrCodeUrl(Passport passport) {
+        return "https://api.qrserver.com/v1/create-qr-code/?data=" + passport.getId();
+    }
 }
