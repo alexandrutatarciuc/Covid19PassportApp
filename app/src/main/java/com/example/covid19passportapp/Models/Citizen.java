@@ -29,7 +29,7 @@ public class Citizen {
     public Citizen(String fullName, DateTime birthdate) {
         this.fullName = fullName;
         this.birthdate = birthdate;
-        passport = new Passport();
+        //passport = new Passport();
         tests = new ArrayList<>();
     }
 

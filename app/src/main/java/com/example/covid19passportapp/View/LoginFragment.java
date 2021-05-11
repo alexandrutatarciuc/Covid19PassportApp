@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.covid19passportapp.Persistence.Repository;
 import com.example.covid19passportapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,6 +85,7 @@ public class LoginFragment extends Fragment {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(logInTask -> {
                 if (logInTask.isSuccessful()) {
                     Toast.makeText(getContext(), "User successfully logged in", Toast.LENGTH_LONG).show();
+                    Repository.updateCurrentUser();
                     ((MainActivity) getActivity()).goToMain();
                 } else {
                     Toast.makeText(getContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();

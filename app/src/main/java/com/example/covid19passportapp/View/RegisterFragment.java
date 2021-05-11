@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.covid19passportapp.Models.Citizen;
+import com.example.covid19passportapp.Persistence.Repository;
 import com.example.covid19passportapp.R;
 import com.example.covid19passportapp.ViewModel.CitizenViewModel;
 import com.example.covid19passportapp.ViewModel.PassportViewModel;
@@ -60,7 +61,7 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        citizenViewModel =  new ViewModelProvider(this).get(CitizenViewModel.class);
+
 
         emailInput = view.findViewById(R.id.registerEmailEditInput);
         passwordInput = view.findViewById(R.id.registerPasswordEditInput);
@@ -121,12 +122,16 @@ public class RegisterFragment extends Fragment {
         try {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    //Toast.makeText(getContext(), "User successfully registered", Toast.LENGTH_SHORT).show();
+
                     DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
                     DateTime birthdate = dtf.parseDateTime(birthdateInput.getText().toString());
-                    citizenViewModel.addCitizen(new Citizen(fullNameInput.getText().toString(), birthdate));
-                    Log.d("REGISTER_FRAGMENT","I GOT HERE");
-                    backToLogin();
+                    birthdate = new DateTime();
+                    FirebaseUser thisUser = FirebaseAuth.getInstance().getCurrentUser();
+                    citizenViewModel =  new ViewModelProvider(this).get(CitizenViewModel.class);
+                    citizenViewModel.addCitizen(new Citizen(fullNameInput.getText().toString(), birthdate), thisUser.getUid());
+                    Repository.updateCurrentUser(); //redundant
+                    ((MainActivity) getActivity()).goToMain();
+                    Toast.makeText(getContext(), "User successfully registered", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.d("REGISTER", task.getException().getMessage());
                     Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();

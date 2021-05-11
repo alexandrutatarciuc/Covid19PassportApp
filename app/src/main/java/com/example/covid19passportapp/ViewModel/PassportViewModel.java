@@ -22,7 +22,7 @@ public class PassportViewModel extends ViewModel {
         repository.setPassport(passport);
     }
 
-    public boolean isPassportCreated() {
+    public LiveData<Boolean> isPassportCreated() {
         return repository.isPassportCreated();
     }
 

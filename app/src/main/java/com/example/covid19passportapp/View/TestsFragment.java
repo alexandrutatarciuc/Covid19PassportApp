@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.example.covid19passportapp.Models.Test;
 import com.example.covid19passportapp.Models.TestsRecyclerAdapter;
 import com.example.covid19passportapp.R;
+import com.example.covid19passportapp.ViewModel.CitizenViewModel;
 import com.example.covid19passportapp.ViewModel.TestsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,7 +51,7 @@ public class TestsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tests, container, false);
 
-
+        testsViewModel =  new ViewModelProvider(this).get(TestsViewModel.class);
 
         //Observer (creates new adapter, sets it for the recyclerView)
         final Observer<List<Test>> allTestsObserver = tests -> {
@@ -59,7 +60,7 @@ public class TestsFragment extends Fragment {
         };
 
         //TestsViewModel
-        testsViewModel = new ViewModelProvider(this).get(TestsViewModel.class);
+
         testsViewModel.getAllTests().observe(getViewLifecycleOwner(), allTestsObserver);
 
         //Floating action button

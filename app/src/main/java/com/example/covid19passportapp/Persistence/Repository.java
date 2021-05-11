@@ -32,15 +32,18 @@ public class Repository {
 
     private static Repository instance;
 
-    private final FirebaseUser currentUser;
+    private static FirebaseUser currentUser;
     private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://covid19passportapp-default-rtdb.europe-west1.firebasedatabase.app/");
-    private final DatabaseReference rootRef;
+    private static DatabaseReference rootRef;
 
     private MutableLiveData<Citizen> citizen;
-    private MutableLiveData<Passport> passport;
-    private MutableLiveData<List<Test>> tests;
-    private MutableLiveData<String> fullName;
-    private MutableLiveData<DateTime> birthdate;
+    private static MutableLiveData<Passport> passport;
+    private static MutableLiveData<List<Test>> tests;
+    private static MutableLiveData<String> fullName;
+    private static MutableLiveData<DateTime> birthdate;
+    private static ChildEventListener childEventListener;
+
+    private static MutableLiveData<Boolean> isPassportCreated;
 
     private Repository() {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -49,31 +52,135 @@ public class Repository {
         fullName = new MutableLiveData<>();
         birthdate = new MutableLiveData<>();
         tests = new MutableLiveData<>();
-        /*List<Test> mockUpTests = new ArrayList<Test>();
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "UNKNOWN"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "POSITIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        mockUpTests.add(new Test(DateTime.now(), "NEGATIVE"));
-        tests.setValue(mockUpTests);*/
+        isPassportCreated = new MutableLiveData<>();
+        //tests.setValue(new ArrayList<Test>()); //TODO Test remove
+
+        childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                //TODO maybe needs to be handled to set MutableLiveData for tests
+                String dataModified = snapshot.getKey();
+
+                switch (dataModified) {
+                    case "fullName":
+                        fullName.setValue((String) snapshot.getValue());
+                        break;
+                    case "birthdateMilis":
+                        birthdate.setValue(new DateTime(snapshot.getValue()));
+                        break;
+                    case "passport":
+                        Log.d("FIREBASE_PASSPORT", snapshot.getValue().toString());
+                        Passport receivedPassport = snapshot.getValue(Passport.class);
+                        //Converting millis to DateTime
+                        receivedPassport.setVaccinationDate(new DateTime(receivedPassport.getVaccinationDateMilis()));
+                        receivedPassport.setImmuneUntil(new DateTime(receivedPassport.getImmuneUntilMilis()));
+                        passport.setValue(receivedPassport);
+                        isPassportCreated.setValue(true);
+                        break;
+                    case "tests":
+                        List<Test> receivedTests = new ArrayList<>();
+                        //Looping through snapshot's children and saving them as separate tests
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            Test test = d.getValue(Test.class);
+                            receivedTests.add(test);
+                        }
+                        //Converting millis to DateTime
+                        for (Test t : receivedTests) {
+                            t.setDate(new DateTime(t.getDateMilis()));
+                        }
+                        tests.setValue(receivedTests);
+                        break;
+                    default:
+                        Log.wtf("REPOSITORY", "Data not recognized");
+                        break;
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String dataModified = snapshot.getKey();
+
+                switch (dataModified) {
+                    case "fullName":
+                        fullName.setValue((String) snapshot.getValue());
+                        break;
+                    case "birthdateMilis":
+                        birthdate.setValue(new DateTime(snapshot.getValue()));
+                        break;
+                    case "passport":
+                        Log.d("FIREBASE_PASSPORT", snapshot.getValue().toString());
+                        Passport receivedPassport = snapshot.getValue(Passport.class);
+                        //Converting millis to DateTime
+                        receivedPassport.setVaccinationDate(new DateTime(receivedPassport.getVaccinationDateMilis()));
+                        receivedPassport.setImmuneUntil(new DateTime(receivedPassport.getImmuneUntilMilis()));
+                        passport.setValue(receivedPassport);
+                        isPassportCreated.setValue(true);
+                        break;
+                    case "tests":
+                        List<Test> receivedTests = new ArrayList<>();
+                        //Looping through snapshot's children and saving them as separate tests
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            Test test = d.getValue(Test.class);
+                            receivedTests.add(test);
+                        }
+                        //Converting millis to DateTime
+                        for (Test t : receivedTests) {
+                            t.setDate(new DateTime(t.getDateMilis()));
+                        }
+                        tests.setValue(receivedTests);
+                        break;
+                    default:
+                        Log.wtf("REPOSITORY", "Data not recognized");
+                        break;
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
 
         database.setLogLevel(Logger.Level.DEBUG);   //Debugging Firebase
         database.setPersistenceEnabled(true);   //Enabling Offline Persistence
         rootRef = database.getReference();
 
-        listenToCitizensDataUpdates();
+        if (currentUser != null) {
+            listenToCitizensDataUpdates();
+        }
     }
 
     public static synchronized Repository getInstance() {
         if (instance == null)
             instance = new Repository();
         return instance;
+    }
+
+    public static void destroyCurrentUser() {
+        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
+        db.removeEventListener(childEventListener);
+        currentUser = null;
+        fullName = new MutableLiveData<>();
+        birthdate = new MutableLiveData<>();
+        passport = new MutableLiveData<>();
+        tests = new MutableLiveData<>();
+        isPassportCreated = new MutableLiveData<>();
+    }
+
+    public static void updateCurrentUser() {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
+        db.addChildEventListener(childEventListener);
     }
 
     public LiveData<String> getFullName() {
@@ -97,7 +204,23 @@ public class Repository {
     }
 
     public void addTest(Test test) {
-        Objects.requireNonNull(tests.getValue()).add(test);
+        //Objects.requireNonNull(tests.getValue()).add(test);
+        test.setDateMilis(test.getDate().getMillis());
+
+        //Reference to the current user
+        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid()).child("tests").push();
+
+        //Adding to the Firebase Realtime Database
+        db.setValue(test, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (error == null) {
+                    Log.d("FIREBASE", "Test added successfully");
+                } else {
+                    Log.d("FIREBASE", error.toString());
+                }
+            }
+        });
     }
 
     public LiveData<Passport> getPassport() {
@@ -105,92 +228,57 @@ public class Repository {
     }
 
     public void setPassport(Passport passport) {
-        this.passport.setValue(passport);
+        passport.setVaccinationDateMilis(passport.getVaccinationDate().getMillis());
+        passport.setImmuneUntilMilis(passport.getImmuneUntil().getMillis());
+
+        //Reference to the current user
+        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid()).child("passport");
+
+        //Adding to the Firebase Realtime Database
+        db.setValue(passport, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (error == null) {
+                    Log.d("FIREBASE", "Passport added successfully");
+                    isPassportCreated.setValue(true);
+                } else {
+                    Log.d("FIREBASE", error.toString());
+                }
+            }
+        });
     }
 
-    public boolean isPassportCreated() {
-        return passport.getValue() != null;
+    public LiveData<Boolean> isPassportCreated() {
+        return isPassportCreated;
     }
 
     public LiveData<Citizen> getCitizen() {
         return citizen;
     }
 
-    public void addCitizen(Citizen citizen) {
+    public void addCitizen(Citizen citizen, String uid) {
         //Setting DateTime birthdate
         citizen.setBirthdateMilis(citizen.getBirthdate().getMillis());
 
-        //Updating fullName and birthdate
-        fullName.setValue(citizen.getFullName());
-        birthdate.setValue(citizen.getBirthdate());
-
         //Reference to the current user
-        DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
+        DatabaseReference db = rootRef.child("citizens").child(uid);
 
         //Adding to the Firebase Realtime Database
         db.setValue(citizen, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 if (error == null) {
-
-                    Log.d("FIREBASE", "success");
+                    Log.d("FIREBASE", "Citizen added successfully");
+                    listenToCitizensDataUpdates();
                 } else {
                     Log.d("FIREBASE", error.toString());
                 }
             }
         });
-
-        //Updating Livedata
-        this.citizen.setValue(citizen);
     }
 
     private void listenToCitizensDataUpdates() {
-        //Reference to the current user
         DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
-
-        db.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //TODO maybe needs to be handled to set MutableLiveData for tests
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String dataModified = snapshot.getKey();
-
-                switch (dataModified) {
-                    case "fullName":
-                        fullName.setValue((String) snapshot.getValue());
-                        break;
-                    case "birthdate":
-                        birthdate.setValue((DateTime) snapshot.getValue());
-                        break;
-                    case "passport":
-                        passport.setValue((Passport) snapshot.getValue());
-                        break;
-                    case "tests":
-                        tests.setValue((List<Test>) snapshot.getValue());
-                        break;
-                    default:
-                        Log.wtf("REPOSITORY", "Data not recognized");
-                        break;
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        db.addChildEventListener(childEventListener);
     }
 }

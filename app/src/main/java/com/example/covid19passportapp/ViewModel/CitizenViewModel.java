@@ -19,9 +19,8 @@ public class CitizenViewModel extends ViewModel {
     }
 
 
-    public void addCitizen(Citizen citizen) {
-        repository.addCitizen(citizen);
-        Log.d("CITIZEN_VIEW_MODEL","I GOT HERE");
+    public void addCitizen(Citizen citizen, String uid) {
+        repository.addCitizen(citizen, uid);
     }
 
     public LiveData<String> getFullName() {

@@ -1,29 +1,24 @@
 package com.example.covid19passportapp.Models;
 
+import com.google.firebase.database.Exclude;
+
 import org.joda.time.DateTime;
 
 public class Passport {
 
     private String id;
-    private String fullName;
-    private DateTime birthdate;
     private String country;
+    @Exclude
     private DateTime vaccinationDate;
     private String vaccineType;
+    @Exclude
     private DateTime immuneUntil;
+    private long vaccinationDateMilis;
+    private long immuneUntilMilis;
 
     public Passport() {
     }
 
-    /*public Passport(String id, String fullName, DateTime birthdate, String country, DateTime vaccinationDate, String vaccineType, DateTime immuneUntil) {
-        this.id = id;
-        this.fullName = fullName;
-        this.birthdate = birthdate;
-        this.country = country;
-        this.vaccinationDate = vaccinationDate;
-        this.vaccineType = vaccineType;
-        this.immuneUntil = immuneUntil;
-    }*/
 
     public Passport(String id, String country, DateTime vaccinationDate, String vaccineType, DateTime immuneUntil) {
         this.id = id;
@@ -45,22 +40,6 @@ public class Passport {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public DateTime getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(DateTime birthdate) {
-        this.birthdate = birthdate;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -69,6 +48,7 @@ public class Passport {
         this.country = country;
     }
 
+    @Exclude
     public DateTime getVaccinationDate() {
         return vaccinationDate;
     }
@@ -85,11 +65,28 @@ public class Passport {
         this.vaccineType = vaccineType;
     }
 
+    @Exclude
     public DateTime getImmuneUntil() {
         return immuneUntil;
     }
 
     public void setImmuneUntil(DateTime immuneUntil) {
         this.immuneUntil = immuneUntil;
+    }
+
+    public long getVaccinationDateMilis() {
+        return vaccinationDateMilis;
+    }
+
+    public void setVaccinationDateMilis(long vaccinationDateMilis) {
+        this.vaccinationDateMilis = vaccinationDateMilis;
+    }
+
+    public long getImmuneUntilMilis() {
+        return immuneUntilMilis;
+    }
+
+    public void setImmuneUntilMilis(long immuneUntilMilis) {
+        this.immuneUntilMilis = immuneUntilMilis;
     }
 }

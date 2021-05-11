@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.covid19passportapp.Persistence.Repository;
 import com.example.covid19passportapp.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            Toast.makeText(this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
             goToMain();
         } else {
             goToLogin();
@@ -79,8 +80,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //Log out
         navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setOnMenuItemClickListener(l -> {
+
             FirebaseAuth.getInstance().signOut();
+            Repository.destroyCurrentUser();
 
             //Reloading the activity
             //goToLogin not working

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,15 +72,6 @@ public class HomeFragment extends Fragment {
         passportViewModel = new ViewModelProvider(this).get(PassportViewModel.class);
         citizenViewModel = new ViewModelProvider(this).get(CitizenViewModel.class);
 
-        //Passport Observer
-        Observer<Passport> passportObserver = passport -> {
-            passportID.setText(passport.getId());
-            country.setText(passport.getCountry());
-            vaccinationDate.setText(passport.getVaccinationDate().toString("dd/MM/yyyy"));
-            vaccineType.setText(passport.getVaccineType());
-            immuneUntil.setText(passport.getImmuneUntil().toString("dd/MM/yyyy"));
-        };
-
         passportNotCreated = view.findViewById(R.id.passportNotCreatedConstraintLayout);
         passportCreated = view.findViewById(R.id.passportCreatedConstraintLayout);
 
@@ -96,12 +88,25 @@ public class HomeFragment extends Fragment {
 
         citizenViewModel.getFullName().observe(getViewLifecycleOwner(), (fullName) -> this.fullName.setText(fullName));
         citizenViewModel.getBirthdate().observe(getViewLifecycleOwner(), (birthdate) -> this.birthdate.setText(birthdate.toString("dd/MM/yyyy")));
-        passportViewModel.getPassport().observe(getViewLifecycleOwner(), passportObserver);
 
-        if (passportViewModel.isPassportCreated()) {
-            passportCreated.setVisibility(VISIBLE);
-            passportNotCreated.setVisibility(GONE);
-        }
+        Log.d("HOMEFRAGMENT", "passportViewModel.isPassportCreated():" + passportViewModel.isPassportCreated());
+
+        passportViewModel.isPassportCreated().observe(getViewLifecycleOwner(), (c) -> {
+            if (c) {
+                passportCreated.setVisibility(VISIBLE);
+                passportNotCreated.setVisibility(GONE);
+
+                //Passport Observer
+                Observer<Passport> passportObserver = passport -> {
+                    passportID.setText(passport.getId());
+                    country.setText(passport.getCountry());
+                    vaccinationDate.setText(passport.getVaccinationDate().toString("dd/MM/yyyy"));
+                    vaccineType.setText(passport.getVaccineType());
+                    immuneUntil.setText(passport.getImmuneUntil().toString("dd/MM/yyyy"));
+                };
+                passportViewModel.getPassport().observe(getViewLifecycleOwner(), passportObserver);
+            }
+        });
 
         return view;
     }
