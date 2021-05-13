@@ -11,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.covid19passportapp.Models.Citizen;
 import com.example.covid19passportapp.Models.Passport;
 import com.example.covid19passportapp.Models.Test;
+import com.example.covid19passportapp.Remote.CoronaAPI;
+import com.example.covid19passportapp.Remote.CoronaServiceGenerator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -27,6 +29,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class Repository {
 
@@ -158,6 +165,7 @@ public class Repository {
         if (currentUser != null) {
             listenToCitizensDataUpdates();
         }
+        getLatestCasesByCountry("denmark");
     }
 
     public static synchronized Repository getInstance() {
@@ -280,5 +288,34 @@ public class Repository {
     private void listenToCitizensDataUpdates() {
         DatabaseReference db = rootRef.child("citizens").child(currentUser.getUid());
         db.addChildEventListener(childEventListener);
+    }
+
+    public void getLatestCasesByCountry(String country) {
+        MutableLiveData<String> cases = new MutableLiveData<>();
+
+        CoronaAPI coronaAPI = CoronaServiceGenerator.getCoronaAPI();
+        Call<String> call = coronaAPI.getLatestCountryDataByName(country);
+        call.enqueue(new Callback<String>() {
+
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.code() == 200) {
+                    Log.i("CORONAVIRUS_CASES", String.valueOf(response.body()));
+                } else {
+                    Log.i("CORONAVIRUS_CASES", response.code() + " " + response.message());
+                }
+            }
+
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+                Log.i("Retrofit", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+        //return cases;
     }
 }
