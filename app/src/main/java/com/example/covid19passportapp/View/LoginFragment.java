@@ -85,6 +85,7 @@ public class LoginFragment extends Fragment {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(logInTask -> {
                 if (logInTask.isSuccessful()) {
                     Toast.makeText(getContext(), "User successfully logged in", Toast.LENGTH_LONG).show();
+                    Repository.getInstance();
                     Repository.updateCurrentUser();
                     ((MainActivity) getActivity()).goToMain();
                 } else {

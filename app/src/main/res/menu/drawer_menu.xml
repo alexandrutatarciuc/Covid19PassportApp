@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
+    <group android:id="@+id/grp1"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_outline_document_scanner_24"
             android:title="Passport" />
         <item
             android:id="@+id/testsFragment"
-            android:title="See my tests" />
+            android:icon="@drawable/ic_outline_health_and_safety_24"
+            android:title="See my tests"/>
+    </group>
+    <group android:id="@+id/grp2">
         <item
             android:id="@+id/logOut"
+            android:icon="@drawable/ic_baseline_logout_24"
             android:title="Log out" />
     </group>
+
 </menu>

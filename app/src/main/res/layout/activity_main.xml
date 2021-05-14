@@ -50,7 +50,11 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_view_header"
         app:itemBackground="@color/white"
-        app:menu="@menu/drawer_menu" />
+        app:itemTextAppearance="@style/menu_text_style"
+        app:menu="@menu/drawer_menu" >
+
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

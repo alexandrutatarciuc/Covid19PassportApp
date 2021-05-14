@@ -7,5 +7,5 @@ public class CovidData {
     private long recovered;
     private long critical;
     private long deaths;
-    
+
 }

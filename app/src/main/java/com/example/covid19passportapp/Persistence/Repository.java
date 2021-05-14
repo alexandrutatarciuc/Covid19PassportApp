@@ -40,7 +40,7 @@ public class Repository {
     private static Repository instance;
 
     private static FirebaseUser currentUser;
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://covid19passportapp-default-rtdb.europe-west1.firebasedatabase.app/");
+    private final FirebaseDatabase database;
     private static DatabaseReference rootRef;
 
     private MutableLiveData<Citizen> citizen;
@@ -158,6 +158,7 @@ public class Repository {
             }
         };
 
+        database = FirebaseDatabase.getInstance("https://covid19passportapp-default-rtdb.europe-west1.firebasedatabase.app/");
         database.setLogLevel(Logger.Level.DEBUG);   //Debugging Firebase
         database.setPersistenceEnabled(true);   //Enabling Offline Persistence
         rootRef = database.getReference();

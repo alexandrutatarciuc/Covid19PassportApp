@@ -71,7 +71,8 @@
                 android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:maxLines="1"
+                android:inputType="textCapWords" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +136,8 @@
                 android:id="@+id/createPassportCountryEditInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:maxLines="1"
+                android:inputType="textCapWords" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +158,8 @@
                 android:id="@+id/createPassportVaccineTypeEditInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:maxLines="1"
+                android:inputType="textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
