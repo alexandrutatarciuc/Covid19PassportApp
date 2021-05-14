@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.covid19passportapp.Models.Citizen;
+import com.example.covid19passportapp.Models.CovidData;
+import com.example.covid19passportapp.Models.CovidHistory;
 import com.example.covid19passportapp.Models.Passport;
 import com.example.covid19passportapp.Models.Test;
 import com.example.covid19passportapp.Remote.CoronaAPI;
@@ -166,7 +168,7 @@ public class Repository {
         if (currentUser != null) {
             listenToCitizensDataUpdates();
         }
-        getLatestCasesByCountry("denmark");
+        getLatestCasesByCountry("DK");
     }
 
     public static synchronized Repository getInstance() {
@@ -295,14 +297,14 @@ public class Repository {
         MutableLiveData<String> cases = new MutableLiveData<>();
 
         CoronaAPI coronaAPI = CoronaServiceGenerator.getCoronaAPI();
-        Call<String> call = coronaAPI.getLatestCountryDataByName(country);
-        call.enqueue(new Callback<String>() {
+        Call<CovidHistory> call = coronaAPI.getLatestCountryDataByName(country);
+        call.enqueue(new Callback<CovidHistory>() {
 
             @EverythingIsNonNull
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<CovidHistory> call, Response<CovidHistory> response) {
                 if (response.code() == 200) {
-                    Log.i("CORONAVIRUS_CASES", String.valueOf(response.body()));
+                    Log.i("CORONAVIRUS_CASES", String.valueOf(response.body().toString()));
                 } else {
                     Log.i("CORONAVIRUS_CASES", response.code() + " " + response.message());
                 }
@@ -310,7 +312,7 @@ public class Repository {
 
             @EverythingIsNonNull
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<CovidHistory> call, Throwable t) {
                 Log.i("Retrofit", "Something went wrong :(");
                 Log.i("Retrofit", t.getMessage());
                 t.printStackTrace();
