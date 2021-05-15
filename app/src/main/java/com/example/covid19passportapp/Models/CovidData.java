@@ -1,29 +1,25 @@
 package com.example.covid19passportapp.Models;
 
-import android.util.Log;
-
-import com.example.covid19passportapp.Remote.CustomCovidHistoryDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import org.joda.time.DateTime;
 
-import java.util.Iterator;
-import java.util.Map;
-
 public class CovidData {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = JsonFormat.DEFAULT_TIMEZONE)
+    @JsonProperty("date")
     private DateTime date;
-    private long confirmed;
-    private long deaths;
-    private long recovered;
+    @JsonProperty("confirmed")
+    private int confirmed;
+    @JsonProperty("deaths")
+    private int deaths;
+    @JsonProperty("recovered")
+    private int recovered;
 
     public CovidData() {
     }
 
-    public CovidData(DateTime date, long confirmed, long deaths, long recovered) {
+    public CovidData(DateTime date, int confirmed, int deaths, int recovered) {
         this.date = date;
         this.confirmed = confirmed;
         this.deaths = deaths;
@@ -38,28 +34,27 @@ public class CovidData {
         this.date = date;
     }
 
-    public long getConfirmed() {
+    public int getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(long confirmed) {
+    public void setConfirmed(int confirmed) {
         this.confirmed = confirmed;
     }
 
-    public long getDeaths() {
+    public int getDeaths() {
         return deaths;
     }
 
-    public void setDeaths(long deaths) {
+    public void setDeaths(int deaths) {
         this.deaths = deaths;
     }
 
-    public long getRecovered() {
+    public int getRecovered() {
         return recovered;
     }
 
-    public void setRecovered(long recovered) {
+    public void setRecovered(int recovered) {
         this.recovered = recovered;
     }
-
 }

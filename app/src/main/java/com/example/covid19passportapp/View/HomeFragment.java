@@ -105,7 +105,8 @@ public class HomeFragment extends Fragment {
                     vaccinationDate.setText(passport.getVaccinationDate().toString("dd/MM/yyyy"));
                     vaccineType.setText(passport.getVaccineType());
                     immuneUntil.setText(passport.getImmuneUntil().toString("dd/MM/yyyy"));
-                    Glide.with(getActivity()).load(passportViewModel.getQrCodeUrl(passport)).into(qrCode);
+                    Glide.with(this).load(passportViewModel.getQrCodeUrl(passport)).into(qrCode);
+                    Log.d("GLIDE", passportViewModel.getQrCodeUrl(passport));
                 };
                 passportViewModel.getPassport().observe(getViewLifecycleOwner(), passportObserver);
             }

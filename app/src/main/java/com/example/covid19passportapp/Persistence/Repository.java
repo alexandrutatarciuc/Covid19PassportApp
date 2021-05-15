@@ -304,6 +304,7 @@ public class Repository {
             @Override
             public void onResponse(Call<CovidHistory> call, Response<CovidHistory> response) {
                 if (response.code() == 200) {
+
                     Log.i("CORONAVIRUS_CASES", String.valueOf(response.body().toString()));
                 } else {
                     Log.i("CORONAVIRUS_CASES", response.code() + " " + response.message());

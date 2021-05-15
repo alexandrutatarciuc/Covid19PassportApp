@@ -2,18 +2,14 @@ package com.example.covid19passportapp.Models;
 
 import android.util.Log;
 
-import com.example.covid19passportapp.Remote.CustomCovidHistoryDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.gson.Gson;
+
+import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,15 +31,17 @@ public class CovidHistory {
 
     @JsonProperty("stats")
     public void unpackData(Map<String, Object> stats) throws IOException {
-        List<String> jsonHistory = (List<String>) stats.get("history");
+        ArrayList<?> jsonHistory = (ArrayList<?>) stats.get("history");
+        Log.d("DESERIALIZE", stats.get("history").toString());
 
-
-        Log.d("DESERIALIZE", jsonHistory.toString());
-        ObjectMapper mapper = new ObjectMapper();
-
-        /*List<CovidData> asList = mapper.readValue(
-                jsonHistory, new TypeReference<List<CovidData>>() { });
-
-        Log.d("DESERIALIZE", asList.get(100).toString());*/
+        for (Object o : jsonHistory) {
+            try {
+                LinkedHashMap<String, Object> newO = (LinkedHashMap<String, Object>) o;
+                CovidData data = new CovidData(DateTime.parse((String) newO.get("date")), (int) newO.get("confirmed"), (int) newO.get("deaths"), (int) newO.get("recovered"));
+                history.add(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
