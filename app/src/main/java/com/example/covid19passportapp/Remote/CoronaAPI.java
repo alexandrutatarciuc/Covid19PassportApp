@@ -12,7 +12,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CoronaAPI {
-
     @Headers({
             "x-rapidapi-key: 3df158567bmsh3170cdc85b49adfp1cb11ejsne28c098375fb",
             "x-rapidapi-host: coronavirus-smartable.p.rapidapi.com"

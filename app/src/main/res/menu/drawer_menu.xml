@@ -11,6 +11,10 @@
             android:id="@+id/testsFragment"
             android:icon="@drawable/ic_outline_health_and_safety_24"
             android:title="See my tests"/>
+        <item
+            android:id="@+id/statisticsFragment"
+            android:icon="@drawable/ic_outline_health_and_safety_24"
+            android:title="Statistics"/>
     </group>
     <group android:id="@+id/grp2">
         <item

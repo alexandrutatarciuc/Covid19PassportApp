@@ -24,4 +24,5 @@
     <string name="romanian">Romana</string>
     <string name="danish">Daneza</string>
     <string name="stay_vaccinated">Stai Vaccinat</string>
+    <string name="data_type">Tipul de date</string>
 </resources>

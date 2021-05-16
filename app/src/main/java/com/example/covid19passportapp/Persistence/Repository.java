@@ -168,7 +168,7 @@ public class Repository {
         if (currentUser != null) {
             listenToCitizensDataUpdates();
         }
-        getLatestCasesByCountry("DK");
+        //getLatestCasesByCountry("DK");
     }
 
     public static synchronized Repository getInstance() {

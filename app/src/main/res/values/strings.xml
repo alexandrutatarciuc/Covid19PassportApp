@@ -25,4 +25,5 @@
     <string name="romanian">Romanian</string>
     <string name="danish">Danish</string>
     <string name="stay_vaccinated">Stay Vaccinated</string>
+    <string name="data_type">Data Type</string>
 </resources>

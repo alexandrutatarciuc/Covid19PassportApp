@@ -17,6 +17,9 @@
         <action
             android:id="@+id/openTestsFragmentAction"
             app:destination="@id/testsFragment" />
+        <action
+            android:id="@+id/openStatisticsFragment"
+            app:destination="@id/statisticsFragment" />
     </fragment>
 
     <fragment
@@ -44,6 +47,11 @@
             android:id="@+id/openAddTestFragmentAction"
             app:destination="@id/addTestFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.covid19passportapp.View.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
 
 
 </navigation>
