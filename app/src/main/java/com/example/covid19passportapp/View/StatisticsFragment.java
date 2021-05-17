@@ -162,9 +162,9 @@ public class StatisticsFragment extends Fragment {
 
         LineDataSet set1 = new LineDataSet(values, "Recovered");
         set1.setLineWidth(4f);
-        set1.setColor(Color.parseColor("#06EB68"));
+        set1.setColor(Color.parseColor("#24EB7A"));
         set1.setDrawCircles(false);
-        set1.setHighLightColor(Color.parseColor("#06EB68"));
+        set1.setHighLightColor(Color.parseColor("#24EB7A"));
         set1.setHighlightLineWidth(2f);
         set1.setDrawHorizontalHighlightIndicator(false);
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
@@ -185,9 +185,9 @@ public class StatisticsFragment extends Fragment {
 
         LineDataSet set1 = new LineDataSet(values, "Deaths");
         set1.setLineWidth(4f);
-        set1.setColor(Color.parseColor("#FF0A00"));
+        set1.setColor(Color.parseColor("#FF3900"));
         set1.setDrawCircles(false);
-        set1.setHighLightColor(Color.parseColor("#FF0A00"));
+        set1.setHighLightColor(Color.parseColor("#FF3900"));
         set1.setHighlightLineWidth(2f);
         set1.setDrawHorizontalHighlightIndicator(false);
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);

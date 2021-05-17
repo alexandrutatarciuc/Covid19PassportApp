@@ -46,6 +46,8 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:insetTop="5dp"
+        android:insetBottom="0dp"
         android:text="Confirmed"
         android:fontFamily="@font/poppins_extrabold"
         app:layout_constraintEnd_toEndOf="parent"
