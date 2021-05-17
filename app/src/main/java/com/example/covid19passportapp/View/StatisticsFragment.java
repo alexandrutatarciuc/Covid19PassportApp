@@ -106,6 +106,7 @@ public class StatisticsFragment extends Fragment {
         set1.setHighLightColor(Color.parseColor("#0F77FF"));
         set1.setHighlightLineWidth(2f);
         set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set1.setDrawValues(true);
         set1.setDrawFilled(true);
         Log.i("SDK", String.valueOf(Utils.getSDKInt()));
