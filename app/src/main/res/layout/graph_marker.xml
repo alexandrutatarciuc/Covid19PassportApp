@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="60dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/light_gray"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -16,6 +16,8 @@
             android:id="@+id/markerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="8sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

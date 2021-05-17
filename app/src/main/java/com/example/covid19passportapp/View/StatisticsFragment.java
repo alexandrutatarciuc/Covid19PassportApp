@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.covid19passportapp.Custom.CustomMarkerView;
 import com.example.covid19passportapp.Custom.XAxisValueFormatter;
@@ -36,6 +37,8 @@ import java.util.List;
 public class StatisticsFragment extends Fragment {
 
     private LineChart graph;
+    private Button dataType;
+    private List<CovidData> localCovidData;
 
     public StatisticsFragment() {
         // Required empty public constructor
@@ -55,15 +58,18 @@ public class StatisticsFragment extends Fragment {
 
         final Observer<List<CovidData>> allCovidDataObserver = data -> {
             // update graph
-            LineData newLineData = getConfirmedCovidLineData(data);
+            LineData newLineData = new LineData(getConfirmedCovidLineDataSet(data));
             graph.setData(newLineData);
+            localCovidData = data;
             graph.invalidate(); //refreshes graph
         };
 
         StatisticsViewModel statisticsViewModel = new ViewModelProvider(this).get(StatisticsViewModel.class);
         statisticsViewModel.receiveCovidData("DK");
+        statisticsViewModel.getCovidData().observe(getViewLifecycleOwner(), allCovidDataObserver);
 
         graph = view.findViewById(R.id.graph);
+        dataType = view.findViewById(R.id.dataInput);
 
         LineDataSet lineDataSet = new LineDataSet(null, "Temperature Measurements Set");
         LineData lineData = new LineData((ILineDataSet) lineDataSet);
@@ -92,19 +98,46 @@ public class StatisticsFragment extends Fragment {
         IMarker marker = new CustomMarkerView(getContext(), R.layout.graph_marker);
         graph.setMarker(marker);
 
-        statisticsViewModel.getCovidData().observe(getViewLifecycleOwner(), allCovidDataObserver);
+        dataType.setOnClickListener(v -> {
+            if (dataType.getText().toString().equalsIgnoreCase("confirmed")) {
+                dataType.setText("Recovered");
+                dataType.getBackground().setTint(Color.parseColor("#06EB68"));
+                graph.clear();
+                LineData newLineData = new LineData(getRecoveredCovidLineDataSet(localCovidData));
+                graph.setData(newLineData);
+                graph.invalidate();
+
+            } else if (dataType.getText().toString().equalsIgnoreCase("recovered")) {
+                dataType.setText("Deaths");
+                dataType.getBackground().setTint(Color.parseColor("#FF0A00"));
+                graph.clear();
+                LineData newLineData = new LineData(getDeathsCovidLineDataSet(localCovidData));
+                graph.setData(newLineData);
+                graph.invalidate();
+
+            } else if (dataType.getText().toString().equalsIgnoreCase("deaths")) {
+                dataType.setText("Confirmed");
+                dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                graph.clear();
+                LineData newLineData = new LineData(getConfirmedCovidLineDataSet(localCovidData));
+                graph.setData(newLineData);
+                graph.invalidate();
+            } else {
+                Log.wtf("DATA_TYPE_BUTTON", "Unexpected button text");
+            }
+        });
 
         return view;
     }
 
-    private LineData getConfirmedCovidLineData(List<CovidData> history) {
+    private LineDataSet getConfirmedCovidLineDataSet(List<CovidData> history) {
         ArrayList<Entry> values = new ArrayList<>();
 
         for (CovidData c : history) {
             values.add(new Entry(c.getDate().getMillis(), (float) c.getConfirmed()));
         }
 
-        LineDataSet set1 = new LineDataSet(values, "Temperature Measurements Set");
+        LineDataSet set1 = new LineDataSet(values, "Confirmed");
         set1.setLineWidth(4f);
         set1.setColor(Color.parseColor("#0F75FF"));
         set1.setDrawCircles(false);
@@ -115,59 +148,55 @@ public class StatisticsFragment extends Fragment {
         set1.setDrawValues(true);
         set1.setDrawFilled(true);
         Log.i("SDK", String.valueOf(Utils.getSDKInt()));
-        if (Utils.getSDKInt() >= 18) {
-            // fill drawable only supported on api level 18 and above
-            Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_blue);
-            set1.setFillDrawable(drawable);
-        }
-        else {
-            set1.setFillColor(Color.BLACK);
-        }
-
-        return new LineData(set1);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_blue);
+        set1.setFillDrawable(drawable);
+        return set1;
     }
 
-    private LineData getDeathsCovidLineData(List<CovidData> history) {
-        ArrayList<Entry> values = new ArrayList<>();
-
-        for (CovidData c : history) {
-            values.add(new Entry(c.getDate().getMillis(), (float) c.getDeaths()));
-        }
-
-        LineDataSet set1 = new LineDataSet(values, "Temperature Measurements Set");
-        set1.setLineWidth(4f);
-        set1.setCircleRadius(5f);
-        set1.setCircleHoleRadius(2.5f);
-        set1.setColor(Color.parseColor("#4B6C53"));
-        set1.setCircleColor(Color.WHITE);
-        set1.setCircleHoleColor(Color.parseColor("#4B6C53"));
-        set1.setHighLightColor(Color.parseColor("#48B864"));
-        set1.setHighlightLineWidth(2f);
-        set1.setDrawHorizontalHighlightIndicator(false);
-        set1.setDrawValues(true);
-
-        return new LineData(set1);
-    }
-
-    private LineData getRecoveredCovidLineData(List<CovidData> history) {
+    private LineDataSet getRecoveredCovidLineDataSet(List<CovidData> history) {
         ArrayList<Entry> values = new ArrayList<>();
 
         for (CovidData c : history) {
             values.add(new Entry(c.getDate().getMillis(), (float) c.getRecovered()));
         }
 
-        LineDataSet set1 = new LineDataSet(values, "Temperature Measurements Set");
+        LineDataSet set1 = new LineDataSet(values, "Recovered");
         set1.setLineWidth(4f);
-        set1.setCircleRadius(5f);
-        set1.setCircleHoleRadius(2.5f);
-        set1.setColor(Color.parseColor("#4B6C53"));
-        set1.setCircleColor(Color.WHITE);
-        set1.setCircleHoleColor(Color.parseColor("#4B6C53"));
-        set1.setHighLightColor(Color.parseColor("#48B864"));
+        set1.setColor(Color.parseColor("#06EB68"));
+        set1.setDrawCircles(false);
+        set1.setHighLightColor(Color.parseColor("#06EB68"));
         set1.setHighlightLineWidth(2f);
         set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set1.setDrawValues(true);
-
-        return new LineData(set1);
+        set1.setDrawFilled(true);
+        Log.i("SDK", String.valueOf(Utils.getSDKInt()));
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_green);
+        set1.setFillDrawable(drawable);
+        return set1;
     }
+
+    private LineDataSet getDeathsCovidLineDataSet(List<CovidData> history) {
+        ArrayList<Entry> values = new ArrayList<>();
+
+        for (CovidData c : history) {
+            values.add(new Entry(c.getDate().getMillis(), (float) c.getDeaths()));
+        }
+
+        LineDataSet set1 = new LineDataSet(values, "Deaths");
+        set1.setLineWidth(4f);
+        set1.setColor(Color.parseColor("#FF0A00"));
+        set1.setDrawCircles(false);
+        set1.setHighLightColor(Color.parseColor("#FF0A00"));
+        set1.setHighlightLineWidth(2f);
+        set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set1.setDrawValues(true);
+        set1.setDrawFilled(true);
+        Log.i("SDK", String.valueOf(Utils.getSDKInt()));
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_red);
+        set1.setFillDrawable(drawable);
+        return set1;
+    }
+
 }

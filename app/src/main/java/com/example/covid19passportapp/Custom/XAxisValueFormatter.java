@@ -14,13 +14,6 @@ public class XAxisValueFormatter extends ValueFormatter {
 
     @Override
     public String getAxisLabel(float value, AxisBase axis) {
-        /*axis.setLabelCount(3, true);*/
-        return convertFloatToDate(value);
-
-    }
-
-    private String convertFloatToDate(float value)
-    {
         DateTime dateTime = new DateTime((long) value);
         return dateTime.toString("MMM d");
     }

@@ -9,6 +9,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import org.joda.time.DateTime;
+
 public class CustomMarkerView extends MarkerView {
     private TextView markerTextView;
 
@@ -30,7 +32,8 @@ public class CustomMarkerView extends MarkerView {
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
 
-        markerTextView.setText("" + e.getY());
+        DateTime d = new DateTime((long) e.getX());
+        markerTextView.setText("" + e.getY() + ", " + d.toString("MMM d, ''yy"));
 
         // this will perform necessary layouting
         super.refreshContent(e, highlight);
