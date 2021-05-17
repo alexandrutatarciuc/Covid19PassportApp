@@ -14,10 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.covid19passportapp.Custom.CustomMarkerView;
+import com.example.covid19passportapp.Custom.XAxisValueFormatter;
 import com.example.covid19passportapp.Models.CovidData;
 import com.example.covid19passportapp.R;
 import com.example.covid19passportapp.ViewModel.StatisticsViewModel;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -50,9 +53,9 @@ public class StatisticsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-        final Observer<List<CovidData>> allCovidDataObserver = measurements -> {
+        final Observer<List<CovidData>> allCovidDataObserver = data -> {
             // update graph
-            LineData newLineData = getConfirmedCovidLineData(measurements);
+            LineData newLineData = getConfirmedCovidLineData(data);
             graph.setData(newLineData);
             graph.invalidate(); //refreshes graph
         };
@@ -78,14 +81,16 @@ public class StatisticsFragment extends Fragment {
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setLabelCount(7, true);
-
-
         xAxis.setValueFormatter(new XAxisValueFormatter());
 
         //Right YAxis - disabled
         YAxis yr = graph.getAxisRight();
         yr.setEnabled(false);
         yr.setDrawAxisLine(false);
+
+        //Marker
+        IMarker marker = new CustomMarkerView(getContext(), R.layout.graph_marker);
+        graph.setMarker(marker);
 
         statisticsViewModel.getCovidData().observe(getViewLifecycleOwner(), allCovidDataObserver);
 

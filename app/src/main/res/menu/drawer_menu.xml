@@ -13,13 +13,13 @@
             android:title="See my tests"/>
         <item
             android:id="@+id/statisticsFragment"
-            android:icon="@drawable/ic_outline_health_and_safety_24"
+            android:icon="@drawable/ic_baseline_show_chart_24"
             android:title="Statistics"/>
     </group>
     <group android:id="@+id/grp2">
         <item
             android:id="@+id/logOut"
-            android:icon="@drawable/ic_baseline_show_chart_24"
+            android:icon="@drawable/ic_baseline_logout_24"
             android:title="Log out" />
     </group>
 

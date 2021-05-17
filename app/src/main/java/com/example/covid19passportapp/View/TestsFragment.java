@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,15 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.covid19passportapp.Models.Test;
-import com.example.covid19passportapp.Models.TestsRecyclerAdapter;
+import com.example.covid19passportapp.Custom.TestsRecyclerAdapter;
 import com.example.covid19passportapp.R;
-import com.example.covid19passportapp.ViewModel.CitizenViewModel;
 import com.example.covid19passportapp.ViewModel.TestsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.joda.time.DateTime;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestsFragment extends Fragment {

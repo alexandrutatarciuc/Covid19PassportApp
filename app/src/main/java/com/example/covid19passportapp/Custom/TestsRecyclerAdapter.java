@@ -1,7 +1,5 @@
-package com.example.covid19passportapp.Models;
+package com.example.covid19passportapp.Custom;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.covid19passportapp.Models.Test;
 import com.example.covid19passportapp.R;
 
 import java.util.List;

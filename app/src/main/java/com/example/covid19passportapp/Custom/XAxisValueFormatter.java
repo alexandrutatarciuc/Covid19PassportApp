@@ -1,4 +1,4 @@
-package com.example.covid19passportapp.View;
+package com.example.covid19passportapp.Custom;
 
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.ValueFormatter;
