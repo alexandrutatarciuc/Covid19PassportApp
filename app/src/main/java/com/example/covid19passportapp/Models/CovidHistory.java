@@ -15,33 +15,40 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CovidHistory {
-    private List<CovidData> history;
+    private ArrayList<CovidData> history;
 
     public CovidHistory() {
         history = new ArrayList<>();
     }
 
-    public List<CovidData> getHistory() {
+    public ArrayList<CovidData> getHistory() {
         return history;
     }
 
-    public void setHistory(List<CovidData> history) {
+    public void setHistory(ArrayList<CovidData> history) {
         this.history = history;
     }
 
     @JsonProperty("stats")
     public void unpackData(Map<String, Object> stats) throws IOException {
-        ArrayList<?> jsonHistory = (ArrayList<?>) stats.get("history");
-        Log.d("DESERIALIZE", stats.get("history").toString());
+        try {
+            ArrayList<?> jsonHistory = (ArrayList<?>) stats.get("history");
+            Log.d("DESERIALIZE", stats.get("history").toString());
 
-        for (Object o : jsonHistory) {
-            try {
-                LinkedHashMap<String, Object> newO = (LinkedHashMap<String, Object>) o;
-                CovidData data = new CovidData(DateTime.parse((String) newO.get("date")), (int) newO.get("confirmed"), (int) newO.get("deaths"), (int) newO.get("recovered"));
-                history.add(data);
-            } catch (Exception e) {
-                e.printStackTrace();
+            for (Object o : jsonHistory) {
+                try {
+                    LinkedHashMap<String, Object> newO = (LinkedHashMap<String, Object>) o;
+                    CovidData data = new CovidData(DateTime.parse((String) newO.get("date")), (int) newO.get("confirmed"), (int) newO.get("deaths"), (int) newO.get("recovered"));
+                    history.add(data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
+        catch (Exception e)
+        {
+            Log.d("UNPACKING_DATA", e.getMessage());
+        }
+
     }
 }

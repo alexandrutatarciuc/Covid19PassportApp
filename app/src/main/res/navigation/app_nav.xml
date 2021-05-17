@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.covid19passportapp.View.StatisticsFragment"
-        android:label="fragment_statistics"
+        android:label="Covid Statistics"
         tools:layout="@layout/fragment_statistics" />
 
 

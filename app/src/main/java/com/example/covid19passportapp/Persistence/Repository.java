@@ -51,6 +51,7 @@ public class Repository {
     private static MutableLiveData<String> fullName;
     private static MutableLiveData<DateTime> birthdate;
     private static ChildEventListener childEventListener;
+    private MutableLiveData<ArrayList<CovidData>> statistics;
 
     private static MutableLiveData<Boolean> isPassportCreated;
 
@@ -62,6 +63,7 @@ public class Repository {
         birthdate = new MutableLiveData<>();
         tests = new MutableLiveData<>();
         isPassportCreated = new MutableLiveData<>();
+        statistics = new MutableLiveData<>();
         //tests.setValue(new ArrayList<Test>()); //TODO Test remove
 
         childEventListener = new ChildEventListener() {
@@ -293,18 +295,19 @@ public class Repository {
         db.addChildEventListener(childEventListener);
     }
 
-    public void getLatestCasesByCountry(String country) {
-        MutableLiveData<String> cases = new MutableLiveData<>();
+    public LiveData<ArrayList<CovidData>> getCovidData() {
+        return statistics;
+    }
 
+    public void receiveCovidData(String country) {
         CoronaAPI coronaAPI = CoronaServiceGenerator.getCoronaAPI();
         Call<CovidHistory> call = coronaAPI.getLatestCountryDataByName(country);
         call.enqueue(new Callback<CovidHistory>() {
-
             @EverythingIsNonNull
             @Override
             public void onResponse(Call<CovidHistory> call, Response<CovidHistory> response) {
                 if (response.code() == 200) {
-
+                    statistics.setValue(response.body().getHistory());
                     Log.i("CORONAVIRUS_CASES", String.valueOf(response.body().toString()));
                 } else {
                     Log.i("CORONAVIRUS_CASES", response.code() + " " + response.message());
@@ -319,7 +322,5 @@ public class Repository {
                 t.printStackTrace();
             }
         });
-
-        //return cases;
     }
 }

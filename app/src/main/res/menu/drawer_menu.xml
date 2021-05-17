@@ -19,7 +19,7 @@
     <group android:id="@+id/grp2">
         <item
             android:id="@+id/logOut"
-            android:icon="@drawable/ic_baseline_logout_24"
+            android:icon="@drawable/ic_baseline_show_chart_24"
             android:title="Log out" />
     </group>
 

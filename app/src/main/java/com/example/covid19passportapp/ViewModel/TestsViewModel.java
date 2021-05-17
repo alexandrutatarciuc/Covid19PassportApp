@@ -23,4 +23,5 @@ public class TestsViewModel extends ViewModel {
     public void addTest(Test test) {
         repository.addTest(test);
     }
+
 }
