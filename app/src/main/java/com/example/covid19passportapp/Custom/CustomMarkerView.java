@@ -33,7 +33,7 @@ public class CustomMarkerView extends MarkerView {
     public void refreshContent(Entry e, Highlight highlight) {
 
         DateTime d = new DateTime((long) e.getX());
-        markerTextView.setText("" + e.getY() + ", " + d.toString("MMM d, ''yy"));
+        markerTextView.setText("" + ((long) e.getY()) + ", " + d.toString("MMM d, ''yy"));
 
         // this will perform necessary layouting
         super.refreshContent(e, highlight);

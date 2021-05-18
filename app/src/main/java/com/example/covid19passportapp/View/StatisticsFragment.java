@@ -9,10 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import com.example.covid19passportapp.Custom.CustomMarkerView;
@@ -29,6 +33,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +43,7 @@ public class StatisticsFragment extends Fragment {
 
     private LineChart graph;
     private Button dataType;
+    private AutoCompleteTextView countryACT;
     private List<CovidData> localCovidData;
 
     public StatisticsFragment() {
@@ -47,7 +53,6 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -70,6 +75,7 @@ public class StatisticsFragment extends Fragment {
 
         graph = view.findViewById(R.id.graph);
         dataType = view.findViewById(R.id.dataInput);
+        countryACT = view.findViewById(R.id.countryInputAutoComplete);
 
         LineDataSet lineDataSet = new LineDataSet(null, "Temperature Measurements Set");
         LineData lineData = new LineData((ILineDataSet) lineDataSet);
@@ -126,6 +132,58 @@ public class StatisticsFragment extends Fragment {
                 Log.wtf("DATA_TYPE_BUTTON", "Unexpected button text");
             }
         });
+
+        ArrayList<String> countries = new ArrayList<>();
+        countries.add("Denmark");
+        countries.add("United States");
+        countries.add("Romania");
+        countries.add("Brazil");
+
+        ArrayAdapter<String> resultTypesAdapter = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, countries);
+        countryACT.setAdapter(resultTypesAdapter);
+
+        countryACT.setText(countries.get(0), false);
+
+        //OnTextChangedListener
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String country = countryACT.getText().toString();
+                switch (country) {
+                    case "Denmark": statisticsViewModel.receiveCovidData("DK");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                    break;
+                    case "United States": statisticsViewModel.receiveCovidData("US");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    case "Romania": statisticsViewModel.receiveCovidData("RO");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    case "Brazil": statisticsViewModel.receiveCovidData("BR");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    default:
+                        Log.wtf("COUNTRY_NOT_RECOGNIZED", "Invalid country");
+                        break;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        countryACT.addTextChangedListener(textWatcher);
 
         return view;
     }

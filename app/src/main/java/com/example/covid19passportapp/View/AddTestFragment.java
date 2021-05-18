@@ -79,22 +79,6 @@ public class AddTestFragment extends Fragment {
                         .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                         .build();
 
-       /* //Redundant
-        datePicker.addOnCancelListener((dialogInterface) -> {
-            dateInput.clearFocus();
-        });
-
-        //Redundant
-        datePicker.addOnDismissListener((dialogInterface) -> {
-            dateInput.clearFocus();
-        });
-
-        //Redundant
-        dateInput.setOnFocusChangeListener((v1, s) -> {
-            if (v1.getId() == R.id.testDateEditInput && s) {
-                datePicker.show(this.getParentFragmentManager(), "DATE_PICKER");
-            }
-        });*/
 
         datePicker.addOnPositiveButtonClickListener((selection) -> {
             selectedDate = new DateTime(selection);
