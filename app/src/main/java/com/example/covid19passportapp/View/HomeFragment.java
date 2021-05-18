@@ -1,5 +1,9 @@
 package com.example.covid19passportapp.View;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +33,8 @@ import com.example.covid19passportapp.ViewModel.PassportViewModel;
 import com.example.covid19passportapp.ViewModel.TestsViewModel;
 
 import org.w3c.dom.Text;
+
+import java.util.Locale;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -52,6 +59,7 @@ public class HomeFragment extends Fragment {
     private TextView vaccineType;
     private TextView immuneUntil;
     private ImageView qrCode;
+    private Locale myLocale;
 
 
     public HomeFragment() {
@@ -118,7 +126,28 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.language_menu, menu);
+
+        menu.getItem(0).setOnMenuItemClickListener(item -> {
+            setLocale("en");
+            return true;
+        });
+        menu.getItem(1).setOnMenuItemClickListener(item -> {
+            setLocale("ro-rMD");
+            return true;
+        });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    public void setLocale(String lang) {
+        myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Activity activity = getActivity();
+        getActivity().finish();
+        activity.startActivity(activity.getIntent());
     }
 
 }

@@ -134,15 +134,17 @@ public class StatisticsFragment extends Fragment {
         });
 
         ArrayList<String> countries = new ArrayList<>();
-        countries.add("Denmark");
-        countries.add("United States");
-        countries.add("Romania");
         countries.add("Brazil");
+        countries.add("Denmark");
+        countries.add("England");
+        countries.add("France");
+        countries.add("Moldova");
 
+        
         ArrayAdapter<String> resultTypesAdapter = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, countries);
         countryACT.setAdapter(resultTypesAdapter);
 
-        countryACT.setText(countries.get(0), false);
+        countryACT.setText("Denmark", false);
 
         //OnTextChangedListener
         TextWatcher textWatcher = new TextWatcher() {
@@ -159,7 +161,7 @@ public class StatisticsFragment extends Fragment {
                         dataType.setText("Confirmed");
                         dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
                     break;
-                    case "United States": statisticsViewModel.receiveCovidData("US");
+                    case "USA": statisticsViewModel.receiveCovidData("US");
                         dataType.setText("Confirmed");
                         dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
                         break;
@@ -167,10 +169,35 @@ public class StatisticsFragment extends Fragment {
                         dataType.setText("Confirmed");
                         dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
                         break;
+                    case "Bulgaria": statisticsViewModel.receiveCovidData("BG");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    case "England": statisticsViewModel.receiveCovidData("EN");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    case "Spain": statisticsViewModel.receiveCovidData("ES");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    case "Italy": statisticsViewModel.receiveCovidData("IT");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+                    case "France": statisticsViewModel.receiveCovidData("FR");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
                     case "Brazil": statisticsViewModel.receiveCovidData("BR");
                         dataType.setText("Confirmed");
                         dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
                         break;
+                    case "Moldova": statisticsViewModel.receiveCovidData("MD");
+                        dataType.setText("Confirmed");
+                        dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
+                        break;
+
                     default:
                         Log.wtf("COUNTRY_NOT_RECOGNIZED", "Invalid country");
                         break;
