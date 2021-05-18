@@ -45,10 +45,10 @@
             app:layout_constraintTop_toBottomOf="@id/createPassportIDInput">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/personal_details"
+                android:src="@drawable/ic_baseline_perm_identity_24"
                 android:tint="@color/white" />
 
         </RelativeLayout>
@@ -114,7 +114,7 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/syringe"
+                android:src="@drawable/ic_syringe"
                 android:tint="@color/white" />
 
         </RelativeLayout>
