@@ -2,6 +2,8 @@
  
 I decided to stop enduring the effects of the pandemic and start to act. Besides keeping a solitary life style and respecting all the means of protection against the new virus, I decided to make use of my skills and create a COVID-19 Passport Vaccine for citizens, which will be inevitably implemented in future.
 
+Presentation: https://www.youtube.com/watch?v=aefh3pPtbX0
+
 Requirements:
 
 Must have:
@@ -15,7 +17,7 @@ Should have:
 - [ ] Option of changing language
    
 Could have:
-- [ ] Graphs that will display statistics of COVID-19 cases
+- [x] Graphs that will display statistics of COVID-19 cases
 - [ ] Option of advising the user to take a test in days with unusual high amount of cases
 
 Won't have:
