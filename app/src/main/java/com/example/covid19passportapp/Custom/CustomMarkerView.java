@@ -22,13 +22,10 @@ public class CustomMarkerView extends MarkerView {
      */
     public CustomMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);
-
-        // find your layout components
         markerTextView = (TextView) findViewById(R.id.markerTextView);
     }
 
-    // callbacks everytime the MarkerView is redrawn, can be used to update the
-    // content (user-interface)
+
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
 

@@ -45,7 +45,6 @@ public class Repository {
     private final FirebaseDatabase database;
     private static DatabaseReference rootRef;
 
-    private MutableLiveData<Citizen> citizen;
     private static MutableLiveData<Passport> passport;
     private static MutableLiveData<List<Test>> tests;
     private static MutableLiveData<String> fullName;
@@ -57,19 +56,16 @@ public class Repository {
 
     private Repository() {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        citizen = new MutableLiveData<>();
         passport = new MutableLiveData<>();
         fullName = new MutableLiveData<>();
         birthdate = new MutableLiveData<>();
         tests = new MutableLiveData<>();
         isPassportCreated = new MutableLiveData<>();
         statistics = new MutableLiveData<>();
-        //tests.setValue(new ArrayList<Test>()); //TODO Test remove
 
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //TODO maybe needs to be handled to set MutableLiveData for tests
                 String dataModified = snapshot.getKey();
 
                 switch (dataModified) {
@@ -170,7 +166,6 @@ public class Repository {
         if (currentUser != null) {
             listenToCitizensDataUpdates();
         }
-        //getLatestCasesByCountry("DK");
     }
 
     public static synchronized Repository getInstance() {
@@ -263,10 +258,6 @@ public class Repository {
 
     public LiveData<Boolean> isPassportCreated() {
         return isPassportCreated;
-    }
-
-    public LiveData<Citizen> getCitizen() {
-        return citizen;
     }
 
     public void addCitizen(Citizen citizen, String uid) {

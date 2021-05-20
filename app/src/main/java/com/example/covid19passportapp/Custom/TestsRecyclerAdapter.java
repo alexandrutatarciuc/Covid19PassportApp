@@ -37,11 +37,9 @@ public class TestsRecyclerAdapter extends RecyclerView.Adapter<TestsRecyclerAdap
         holder.date.setText(test.getDate().toString("dd/MM/yy"));
         holder.result.setText(test.getResult());
         if (test.getResult().equalsIgnoreCase("positive")) {
-            //holder.result.setTextColor(Color.parseColor("#FF0023"));
             holder.testResultRow.setBackgroundResource(R.drawable.test_result_row_bg_positive);
         }
         else if (test.getResult().equalsIgnoreCase("negative")) {
-            //holder.result.setTextColor(Color.parseColor("#64B31D"));
             //holder.testResultRow.setBackgroundResource(R.drawable.test_result_row_bg_negative);
         }
 

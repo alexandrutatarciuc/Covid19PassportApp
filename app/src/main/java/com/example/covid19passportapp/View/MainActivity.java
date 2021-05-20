@@ -39,26 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            //Toast.makeText(this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
             goToMain();
         } else {
             goToLogin();
         }
-        //setContentView(R.layout.activity_main);
-        //setContentView(R.layout.login_main);
-
-        /*NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        navController = navHostFragment.getNavController();
-        drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.nav_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(drawerLayout).build();
-
-        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
-        //Allows navigation to destinations when clicking menu items in the navigation drawer
-        NavigationUI.setupWithNavController(navigationView, navController);*/
 
     }
 
@@ -69,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToMain() {
         setContentView(R.layout.activity_main);
-        //setTitle(R.string.app_name);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
@@ -86,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
             Repository.destroyCurrentUser();
 
             //Reloading the activity
-            //goToLogin not working
-            //TODO further research
             finish();
             startActivity(getIntent());
             return true;
@@ -95,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(drawerLayout).build();
 
-        //setSupportActionBar(toolbar);
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //Allows navigation to destinations when clicking menu items in the navigation drawer
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -103,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToLogin() {
-        //TODO
         setContentView(R.layout.login_main);
     }
 

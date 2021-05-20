@@ -19,17 +19,9 @@ public class Citizen {
     public Citizen() {
     }
 
-    public Citizen(String fullName, DateTime birthdate, Passport passport, List<Test> tests) {
+ public Citizen(String fullName, DateTime birthdate) {
         this.fullName = fullName;
         this.birthdate = birthdate;
-        this.passport = passport;
-        this.tests = tests;
-    }
-
-    public Citizen(String fullName, DateTime birthdate) {
-        this.fullName = fullName;
-        this.birthdate = birthdate;
-        //passport = new Passport();
         tests = new ArrayList<>();
     }
 

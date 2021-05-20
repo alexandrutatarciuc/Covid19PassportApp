@@ -128,7 +128,6 @@ public class AddTestFragment extends Fragment {
             DateTime dateTime = dtf.parseDateTime(dateInput.getText().toString());
             testsViewModel.addTest(new Test(dateTime, resultACT.getText().toString()));
 
-            /*Further research on this way of solving BackStack behaviour might be needed when more fragments will be added*/
             NavHostFragment.findNavController(this).popBackStack(); //Pops AddTest Fragment
             NavHostFragment.findNavController(this).popBackStack(); //Pops Out-Dated Tests Fragment
             NavHostFragment.findNavController(this).navigate(R.id.testsFragment);

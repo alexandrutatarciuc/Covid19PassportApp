@@ -136,7 +136,7 @@ public class StatisticsFragment extends Fragment {
         ArrayList<String> countries = new ArrayList<>();
         countries.add("Brazil");
         countries.add("Denmark");
-        countries.add("England");
+        countries.add("UK");
         countries.add("France");
         countries.add("Moldova");
 
@@ -173,7 +173,7 @@ public class StatisticsFragment extends Fragment {
                         dataType.setText("Confirmed");
                         dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
                         break;
-                    case "England": statisticsViewModel.receiveCovidData("EN");
+                    case "UK": statisticsViewModel.receiveCovidData("GB");
                         dataType.setText("Confirmed");
                         dataType.getBackground().setTint(Color.parseColor("#0F77FF"));
                         break;
